@@ -3,13 +3,13 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { ActivityControllerService } from './api/activityController.service';
-import { AuthenticationControllerService } from './api/authenticationController.service';
-import { FinalReservationControllerService } from './api/finalReservationController.service';
-import { PaymentControllerService } from './api/paymentController.service';
-import { PreReservationControllerService } from './api/preReservationController.service';
-import { ReviewControllerService } from './api/reviewController.service';
-import { UserControllerService } from './api/userController.service';
+import { ActivityControllerService } from '../api/activityController.service';
+import { AuthenticationControllerService } from '../api/authenticationController.service';
+import { FinalReservationControllerService } from '../api/finalReservationController.service';
+import { PaymentControllerService } from '../api/paymentController.service';
+import { PreReservationControllerService } from '../api/preReservationController.service';
+import { ReviewControllerService } from '../api/reviewController.service';
+import { UserControllerService } from '../api/userController.service';
 
 @NgModule({
   imports:      [],
