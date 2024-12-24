@@ -13,14 +13,14 @@
 import { Inject, Injectable, Optional }                      from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec }                        from '../encoder';
+import { CustomHttpUrlEncodingCodec }                        from '../configurations/encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { Review } from '../model/review';
+import { Review } from '../models/review';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../configurations/variables';
+import { Configuration }                                     from '../configurations/configuration';
 
 
 @Injectable()
