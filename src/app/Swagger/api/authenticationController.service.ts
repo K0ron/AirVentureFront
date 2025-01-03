@@ -23,7 +23,9 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../configurat
 import { Configuration }                                     from '../configurations/configuration';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class AuthenticationControllerService {
 
     protected basePath = 'http://localhost:8080';

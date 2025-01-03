@@ -23,7 +23,9 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../configurat
 import { Configuration }                                     from '../configurations/configuration';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ActivityControllerService {
 
     protected basePath = 'http://localhost:8080';
@@ -109,10 +111,10 @@ export class ActivityControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public delete2(id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public delete2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public delete2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public delete2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public delete(id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public delete(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public delete(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public delete(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling delete2.');
@@ -189,10 +191,10 @@ export class ActivityControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAll1(observe?: 'body', reportProgress?: boolean): Observable<Array<Activity>>;
-    public getAll1(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Activity>>>;
-    public getAll1(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Activity>>>;
-    public getAll1(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAll(observe?: 'body', reportProgress?: boolean): Observable<Array<Activity>>;
+    public getAll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Activity>>>;
+    public getAll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Activity>>>;
+    public getAll(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -226,10 +228,10 @@ export class ActivityControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOne1(id: number, observe?: 'body', reportProgress?: boolean): Observable<Activity>;
-    public getOne1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Activity>>;
-    public getOne1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Activity>>;
-    public getOne1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getOne(id: number, observe?: 'body', reportProgress?: boolean): Observable<Activity>;
+    public getOne(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Activity>>;
+    public getOne(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Activity>>;
+    public getOne(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getOne1.');
@@ -268,10 +270,10 @@ export class ActivityControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public update1(body: Activity, id: number, observe?: 'body', reportProgress?: boolean): Observable<Activity>;
-    public update1(body: Activity, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Activity>>;
-    public update1(body: Activity, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Activity>>;
-    public update1(body: Activity, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public update(body: Activity, id: number, observe?: 'body', reportProgress?: boolean): Observable<Activity>;
+    public update(body: Activity, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Activity>>;
+    public update(body: Activity, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Activity>>;
+    public update(body: Activity, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling update1.');
