@@ -1,1 +1,23 @@
-<p>header works!</p>
+<div class="header-container">
+  <img class="logo" src="assets/airVentureLogo.svg" alt="logo_airventure" />
+
+  <div class="login-menu-container">
+    <div class="login">
+      <p style="margin-top: 16px; color: rgba(249, 242, 232, 1); text-decoration: underline">
+        Se connecter
+      </p>
+      <div class="icon-container">
+        <img class="user-icon" src="assets/ic-actions-user.svg" alt="user-icon" />
+      </div>
+    </div>
+    <button class="menu">
+      <img
+        width="50"
+        height="50"
+        src="assets/Burger-Menu.svg"
+        alt="burger-menu"
+        (click)="toggleMenu()"
+      />
+    </button>
+  </div>
+</div>
