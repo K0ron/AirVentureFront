@@ -5,11 +5,12 @@ import { Activity, ActivityControllerService } from '../../Swagger/configuration
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { SearchCategoriesComponent } from './component/search-categories/search-categories.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardComponent, CommonModule],
+  imports: [CardComponent, CommonModule, SearchCategoriesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
