@@ -1,23 +1,18 @@
 <div class="search-container">
   <img class="logo" src="assets/AIRVENTURE-LOGO1.png" alt="Airventure logo" />
   <div class="icons-container">
-    <button class="button-size">
-      <img class="icon-size" src="assets/Aerien.png" alt="icon aérien" />
-    </button>
-    <button class="button-size">
-      <img class="icon-size" src="assets/Neige.png" alt="icon neige" />
-    </button>
-    <button class="button-size">
-      <img class="icon-size" src="assets/Aquatique.png" alt="icon aquatique" />
-    </button>
-    <button class="button-size">
-      <img class="icon-size" src="assets/Nature.png" alt="icon nature" />
-    </button>
-    <button class="button-size">
-      <img class="icon-size" src="assets/Pilotage.png" alt="icon pilotage" />
-    </button>
-    <button class="button-size">
-      <img class="icon-size" src="assets/Urbain.png" alt="icon urbain" />
+    <button
+      *ngFor="let icon of icons"
+      class="button-size"
+      (click)="selectCategory(icon.category)"
+      (mouseenter)="icon.isHovered = true"
+      (mouseout)="icon.isHovered = false"
+    >
+      <img
+        class="icon-size"
+        [src]="icon.isHovered || selectedCategory === icon.category ? icon.hover : icon.default"
+        [alt]="icon.alt"
+      />
     </button>
   </div>
 </div>

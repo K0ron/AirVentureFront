@@ -1,57 +1,57 @@
-  /* HEADER */
+/* HEADER */
 .header-container {
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-    left: 0px;
-    top: 80px;
-    background-color: #456054;
-    justify-content: space-between;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  width: 100%;
+  left: 0px;
+  background-color: #456054;
+  justify-content: space-between;
+  z-index: 10;
 }
 
 .logo {
-    margin-top: 21px;
-    margin-left: 81px;
-    margin-bottom: 22px;
+  margin-top: 21px;
+  margin-left: 81px;
+  margin-bottom: 22px;
 }
 
-.login-menu-container{
-    margin-top: 25px;
-    margin-right: 81px;
-    display: flex;
-    flex-direction: row; 
-    gap: 20px;
+.login-menu-container {
+  margin-top: 25px;
+  margin-right: 81px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
-.login{
-    width: 160px;
-    height: 50px;
-    display: flex;
-    flex-direction: row; 
-    gap: 15px;
+.login {
+  width: 160px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 }
 
-.menu{
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer; 
+.menu {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
 }
 
-.icon-container{
-    background: transparent;
-    width: 50px;
-    height: 50px;
-    border: solid 1.5px;
-    border-color: rgba(249, 242, 232, 1);
-    border-radius: 5px; 
+.icon-container {
+  background: transparent;
+  width: 50px;
+  height: 50px;
+  border: solid 1.5px;
+  border-color: rgba(249, 242, 232, 1);
+  border-radius: 5px;
 }
 
-.user-icon{
-    margin: 10px 10px 10px 10px;
+.user-icon {
+  margin: 10px 10px 10px 10px;
 }
-
-
