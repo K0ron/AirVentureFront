@@ -7,7 +7,6 @@ import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LoginRequestDto } from '../domain/dto/login-request.dto';
-import { console } from 'inspector';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from '../domain/services/authentication.service';
 import { response } from 'express';

@@ -5,7 +5,6 @@
   background-color: rgba(249, 242, 232, 1);
   z-index: 1;
   > .logo {
-    position: fixed;
     width: 746px;
     z-index: 2;
   }
@@ -14,7 +13,7 @@
 .icons-container {
   width: 660px;
   display: flex;
-  margin-left: 426px;
+  margin-left: -320px;
   margin-top: 28px;
   justify-content: center;
   gap: 24px;

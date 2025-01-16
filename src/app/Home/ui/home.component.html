@@ -1,4 +1,13 @@
-<app-search-categories />
-<div class="cards">
+<app-search-categories (categorySelected)="onCategorySelected($event)" />
+<div *ngIf="showFilter">
+  <h1>{{ titleCategory }}</h1>
+  <div class="cardsCategories">
+    <app-card *ngFor="let activity of filtredActivities" [activity]="activity" />
+    <div *ngIf="noActivitiesMessage" class="no-activities-message">
+      {{ noActivitiesMessage }}
+    </div>
+  </div>
+</div>
+<div class="cards" *ngIf="!showFilter">
   <app-card *ngFor="let activity of activities" [activity]="activity" />
 </div>
