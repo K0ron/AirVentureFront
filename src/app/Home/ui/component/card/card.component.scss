@@ -2,20 +2,27 @@
   width: 434px;
   height: 366px;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
 }
 
 .card-container:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  img {
+    transform: scale(1.02);
+  }
 }
 
 .image-container {
   img {
-    width: 434px;
-    height: 270px;
+    width: 100%;
+    height: 100%;
     border-radius: 4px;
+    transition: transform 0.3s ease;
+    object-fit: cover;
   }
+}
+
+.text-container {
+  margin-top: 5px;
 }
 
 .gray-font {
