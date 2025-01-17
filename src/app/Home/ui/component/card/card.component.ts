@@ -19,5 +19,6 @@ export class CardComponent {
 
   onCardClick(id: number | undefined) {
     this.router.navigate(['/reservation', id]);
+    console.log('CLICK');
   }
 }
