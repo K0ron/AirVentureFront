@@ -8,22 +8,19 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LoginRequestDto } from '../domain/dto/login-request.dto';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationService } from '../domain/services/authentication.service';
-import { response } from 'express';
-import { error, log } from 'console';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-authentication',
   standalone: true,
   imports: [CommonModule, DividerModule, ButtonModule, InputTextModule, ReactiveFormsModule],
   templateUrl: './authentication.component.html',
-  styleUrl: './authentication.component.scss',
+  styleUrls: ['./authentication.component.scss'],
   providers: [AuthenticationControllerService],
 })
 export class AuthenticationComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
-  http: any;
 
   constructor(
     private authService: AuthenticationControllerService,
@@ -44,13 +41,14 @@ export class AuthenticationComponent {
       );
 
       this.authService.login(loginDto).subscribe({
-        next: (response) => {
-          console.log('Login successful, user ID:', response.id);
+        next: (response: HttpResponse<any>) => {
+          console.log('Login successful:', response);
+          console.log('Cookies:', document.cookie);
           this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Login failed:', error);
-          this.errorMessage = error.error || 'An error occured during login.';
+          this.errorMessage = error.error || 'An error occurred during login.';
         },
       });
     }
