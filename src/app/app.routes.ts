@@ -8,11 +8,11 @@ import { PaymentComponent } from './Payment/ui/payment.component';
 import { HomeComponent } from './Home/ui/home.component';
 
 export const routes: Routes = [
-    {path: "login", component: AuthenticationComponent},
-    {path: "home", component: HomeComponent},
-    {path: "activity", component: ActivityComponent},
-    {path: "reservation/:id", component: ReservationComponent},
-    {path: "profile", component: ProfileComponent},
-    {path: "payment", component: PaymentComponent},
-    {path: "", redirectTo: '/home', pathMatch: "full"} 
+  { path: 'login', component: AuthenticationComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'activities', component: ActivityComponent },
+  { path: 'reservation/:id', component: ReservationComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
