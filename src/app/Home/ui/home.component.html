@@ -1,18 +1,21 @@
-<!-- <app-search-categories (categorySelected)="onCategorySelected($event)" /> -->
 <div class="hero-image">
   <div class="hero-text">
     <p>les meilleurs expériences autour de vous</p>
   </div>
-</div>
-<div *ngIf="showFilter">
-  <h1>{{ titleCategory }}</h1>
-  <div class="cardsCategories">
-    <app-card *ngFor="let activity of filtredActivities" [activity]="activity" />
-    <div *ngIf="noActivitiesMessage" class="no-activities-message">
-      {{ noActivitiesMessage }}
-    </div>
+  <div class="hero-button">
+    <button (click)="navigateToActivities()">
+      Accéder aux activités <i class="pi pi-chevron-right"></i>
+    </button>
   </div>
 </div>
-<div class="cards" *ngIf="!showFilter">
-  <app-card *ngFor="let activity of activities" [activity]="activity" />
+<div class="cards-container">
+  <h1>Pour tous les goûts et toutes les envies</h1>
+  <div class="cards">
+    <app-card *ngFor="let activity of activities" [activity]="activity" />
+  </div>
+  <div class="button-container">
+    <button (click)="navigateToActivities()">
+      Accéder aux activités <i class="pi pi-chevron-right"></i>
+    </button>
+  </div>
 </div>
