@@ -1,11 +1,13 @@
 .cards {
-  width: 434px;
-  height: 366px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 366px;
   gap: 24px;
-  margin-top: 87px;
+  margin-top: 16px;
   margin-left: 81px;
+  width: calc(434px * 3 + 48px);
+  max-height: calc(366px * 2 + 24px);
+  overflow: hidden;
 }
 
 .cardsCategories {
@@ -18,11 +20,20 @@
   margin-top: 30px;
 }
 
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 81px;
+}
+
 h1 {
   display: flex;
-  justify-content: center;
-  font-size: 60px;
-  margin-top: 20px;
+  justify-content: start;
+  font-size: 35px;
+  margin-left: 81px;
+  text-transform: uppercase;
+  font-family: 'BigNoodleTitling', sans-serif;
+  color: rgba(69, 96, 84, 1);
 }
 
 .hero-image {
@@ -50,5 +61,56 @@ h1 {
     font-family: 'BigNoodleTitling', sans-serif;
     font-style: normal;
     text-transform: uppercase;
+  }
+}
+
+.hero-button {
+  position: absolute;
+  bottom: 50px;
+  left: 81px;
+  button {
+    width: 220px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    color: rgba(69, 96, 84, 1);
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    padding: 15px 15px 15px 20px;
+    cursor: pointer;
+    i {
+      margin-left: 8px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  button {
+    width: 220px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(69, 96, 84, 1);
+    border: none;
+    padding: 15px 15px 15px 20px;
+    cursor: pointer;
+    i {
+      margin-left: 8px;
+      width: 30px;
+      height: 30px;
+    }
   }
 }
