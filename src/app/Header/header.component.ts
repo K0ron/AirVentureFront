@@ -42,5 +42,6 @@ export class HeaderComponent {
 
   toggleModalLogin() {
     this.showModalLogin = !this.showModalLogin;
+    console.log('LOGIN MODAL STATE', this.showModalLogin);
   }
 }

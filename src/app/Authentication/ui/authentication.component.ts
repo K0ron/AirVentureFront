@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AuthenticationControllerService } from './../../Swagger/api/authenticationController.service';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LoginRequestDto } from '../domain/dto/login-request.dto';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
@@ -19,38 +20,26 @@ import { HttpResponse } from '@angular/common/http';
   providers: [AuthenticationControllerService],
 })
 export class AuthenticationComponent {
-  loginForm: FormGroup;
   errorMessage: string = '';
 
   constructor(
     private authService: AuthenticationControllerService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+  ) {}
+
+  login(loginDto: LoginRequestDto) {
+    this.authService.login(loginDto).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log('Login successful', response);
+        console.log('Cookies', document.cookie);
+        console.log('Emitting login success event');
+        this.router.navigate(['/activities']);
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+        this.errorMessage = error.error || 'An error occured during login.';
+      },
     });
-  }
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const loginDto = new LoginRequestDto(
-        this.loginForm.get('email')?.value,
-        this.loginForm.get('password')?.value
-      );
-
-      this.authService.login(loginDto).subscribe({
-        next: (response: HttpResponse<any>) => {
-          console.log('Login successful:', response);
-          console.log('Cookies:', document.cookie);
-          this.router.navigate(['/home']);
-        },
-        error: (error) => {
-          console.error('Login failed:', error);
-          this.errorMessage = error.error || 'An error occurred during login.';
-        },
-      });
-    }
   }
 }
