@@ -42,7 +42,7 @@
         <h1 class="register-title">se connecter</h1>
         <button (click)="toggleModalLogin()"><i class="pi pi-times"></i></button>
       </div>
-      <app-login-component />
+      <app-login-component (loginSuccess)="toggleModalLogin()" />
     </p-dialog>
     <!-- <button class="menu">
       <img
