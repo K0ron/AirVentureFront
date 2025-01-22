@@ -2,15 +2,49 @@
   <img class="logo" src="assets/airVentureLogo.svg" alt="logo_airventure" />
 
   <div class="login-menu-container">
-    <div class="login">
-      <p style="margin-top: 16px; color: rgba(249, 242, 232, 1); text-decoration: underline">
-        Se connecter
-      </p>
-      <div class="icon-container">
-        <img class="user-icon" src="assets/ic-actions-user.svg" alt="user-icon" />
+    <button class="register-button" (click)="toggleModalRegister()">S'inscrire</button>
+    <!-- REGISTER MODAL -->
+    <p-dialog
+      [(visible)]="showModalRegister"
+      [closable]="false"
+      [modal]="true"
+      [style]="{
+        width: '480px',
+        height: '614px',
+        background: 'rgba(255, 255, 255, 1)',
+        border: 'none',
+        borderRadius: '5px'
+      }"
+    >
+      <div class="modal-header">
+        <h1 class="register-title">S'inscrire</h1>
+        <button (click)="toggleModalRegister()"><i class="pi pi-times"></i></button>
       </div>
-    </div>
-    <button class="menu">
+      <app-register-component />
+    </p-dialog>
+    <!--#############-->
+
+    <!-- LOGIN MODAL -->
+    <button class="login-button" (click)="toggleModalLogin()">Se connecter</button>
+    <p-dialog
+      [(visible)]="showModalLogin"
+      [closable]="false"
+      [modal]="true"
+      [style]="{
+        width: '480px',
+        height: '424px',
+        background: 'rgba(255, 255, 255, 1)',
+        border: 'none',
+        borderRadius: '5px'
+      }"
+    >
+      <div class="modal-header">
+        <h1 class="register-title">se connecter</h1>
+        <button (click)="toggleModalLogin()"><i class="pi pi-times"></i></button>
+      </div>
+      <app-login-component />
+    </p-dialog>
+    <!-- <button class="menu">
       <img
         width="50"
         height="50"
@@ -18,6 +52,6 @@
         alt="burger-menu"
         (click)="toggleMenu()"
       />
-    </button>
+    </button> -->
   </div>
 </div>

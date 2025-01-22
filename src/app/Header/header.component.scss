@@ -22,15 +22,7 @@
   margin-right: 81px;
   display: flex;
   flex-direction: row;
-  gap: 20px;
-}
-
-.login {
-  width: 160px;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
+  gap: 10px;
 }
 
 .menu {
@@ -43,15 +35,63 @@
   cursor: pointer;
 }
 
-.icon-container {
-  background: transparent;
-  width: 50px;
+.register-button {
+  width: 140px;
   height: 50px;
-  border: solid 1.5px;
-  border-color: rgba(249, 242, 232, 1);
-  border-radius: 5px;
+  border-radius: 4px;
+  border: rgba(249, 242, 232, 1) 1.5px solid;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(249, 242, 232, 1);
+  cursor: pointer;
 }
 
-.user-icon {
-  margin: 10px 10px 10px 10px;
+.login-button {
+  width: 140px;
+  height: 50px;
+  border-radius: 4px;
+  border: rgba(249, 242, 232, 1) 1.5px solid;
+  background-color: rgba(249, 242, 232, 1);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(25, 25, 25, 1);
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 30px 38px 30px;
+}
+
+/* REGISTER MODAL */
+.register-title {
+  font-size: 35px;
+  font-family: 'BigNoodleTitling', sans-serif;
+  font-weight: 400;
+  color: rgba(69, 96, 84, 1);
+  text-transform: uppercase;
+}
+
+p-dialog {
+  button {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(69, 96, 84, 1);
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 1);
+      align-content: center;
+    }
+  }
 }
