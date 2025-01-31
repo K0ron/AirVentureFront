@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardComponent } from './component/card/card.component';
+import { CardComponent } from '../../Activity/ui/component/card/card.component';
 import { CommonModule } from '@angular/common';
 import { Activity, ActivityControllerService } from '../../Swagger/configurations';
 import { Router } from '@angular/router';

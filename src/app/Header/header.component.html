@@ -10,7 +10,7 @@
       [modal]="true"
       [style]="{
         width: '480px',
-        height: '614px',
+        height: '660px',
         background: 'rgba(255, 255, 255, 1)',
         border: 'none',
         borderRadius: '5px'
@@ -20,16 +20,19 @@
         <h1 class="register-title">S'inscrire</h1>
         <button (click)="toggleModalRegister()"><i class="pi pi-times"></i></button>
       </div>
-      <app-register-component />
+      <app-register-component (registerSuccess)="toggleModalRegister()" />
+      <div class="auth-subtile">
+        Déjà membre ? <span class="auth-link" (click)="toggleModalLogin()">se connecter</span>
+      </div>
     </p-dialog>
     <!--#############-->
 
     <!-- LOGIN MODAL -->
     <button class="login-button" (click)="toggleModalLogin()">Se connecter</button>
+
     <p-dialog
       [(visible)]="showModalLogin"
       [closable]="false"
-      [modal]="true"
       [style]="{
         width: '480px',
         height: '424px',
@@ -43,6 +46,10 @@
         <button (click)="toggleModalLogin()"><i class="pi pi-times"></i></button>
       </div>
       <app-login-component (loginSuccess)="toggleModalLogin()" />
+      <div class="auth-subtile">
+        Pas encore membre ?
+        <span class="auth-link" (click)="toggleModalRegister()">s'inscrire</span>
+      </div>
     </p-dialog>
     <!-- <button class="menu">
       <img

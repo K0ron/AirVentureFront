@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -7,10 +7,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationControllerService } from '../../../../Swagger/api/authenticationController.service';
-import { LoginRequestDto } from '../../../domain/dto/login-request.dto';
-import { AuthenticationComponent } from '../../authentication.component';
 import { HttpResponse } from '@angular/common/http';
 import { PasswordModule } from 'primeng/password';
+import { LoginRequestDto } from '../../../domain/dto/login-request.dto';
 
 @Component({
   selector: 'app-login-component',
@@ -28,7 +27,6 @@ import { PasswordModule } from 'primeng/password';
 })
 export class LoginComponentComponent {
   @Output() loginSuccess = new EventEmitter<void>();
-  private authComponent: AuthenticationComponent;
   loginForm: FormGroup;
   errorMessage: string = '';
   showPassword: boolean = false;
@@ -42,12 +40,6 @@ export class LoginComponentComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-
-    this.authComponent = new AuthenticationComponent(
-      this.authService,
-      this.router,
-      this.formBuilder
-    );
   }
 
   onSubmit() {

@@ -12,6 +12,7 @@ import {
 import { CredentialsInterceptor } from './core/interceptors/credentials.interceptor';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { CookieAuthInterceptor } from './core/interceptors/cookie-auth.interceptor';
+import { providePrimeNG } from 'primeng/config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimationsAsync(),
+    providePrimeNG({}),
     provideHttpClient(
       withFetch(),
       withXsrfConfiguration({
