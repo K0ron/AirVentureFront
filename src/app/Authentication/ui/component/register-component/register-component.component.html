@@ -1,9 +1,105 @@
 <div>
-  <div class="accept-terms">
-    <input type="checkbox" class="custom-checkbox" />
-    <p>
-      J’accepte que Airventure m’envoie des emails occasionnels en accord avec la politique de
-      confidentialité
-    </p>
-  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-container">
+    <div class="password-container">
+      <div class="name-container">
+        <label for="firstName">Prénom</label>
+        <input
+          type="firstName"
+          formControlName="firstName"
+          id="firstName"
+          class="name-input"
+          [ngClass]="{
+            'input-error':
+              registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched
+          }"
+        />
+      </div>
+      <div class="name-container">
+        <label for="lastName">Nom</label>
+        <input
+          type="lastName"
+          formControlName="lastName"
+          id="lastName"
+          class="name-input"
+          [ngClass]="{
+            'input-error':
+              registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched
+          }"
+        />
+      </div>
+    </div>
+    <div class="input-container">
+      <label for="email">Adresse e-mail</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="auth-input"
+        [ngClass]="{
+          'input-error': registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+        }"
+      />
+    </div>
+    <div class="password-container">
+      <div class="input-container">
+        <div class="label-password">
+          <label for="password">Mot de passe</label>
+          <div class="tooltip">
+            <i class="pi pi-exclamation-circle"></i>
+            <span class="tooltip-text"
+              >Le mot de passe doit contenir au moins 12 caractères, une lettre majuscule, une
+              lettre minuscule, un caractère spécial et un chiffre.</span
+            >
+          </div>
+        </div>
+        <p-password
+          formControlName="password"
+          [toggleMask]="true"
+          [feedback]="false"
+          [ngClass]="{
+            'input-error':
+              registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+          }"
+        ></p-password>
+      </div>
+      <div class="input-container">
+        <label for="password">Confirmer le mot de passe</label>
+        <p-password
+          formControlName="confirmPassword"
+          [toggleMask]="true"
+          [feedback]="false"
+          [ngClass]="{
+            'input-error':
+              registerForm.get('confirmPassword')?.invalid &&
+              registerForm.get('confirmPassword')?.touched
+          }"
+        ></p-password>
+
+        <div *ngIf="registerForm.errors?.['mismatch']" class="error">
+          Les mots de passe ne correspondent pas.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label for="roles">Vous êtes ?</label>
+      <div class="custom-select">
+        <select formControlName="role" id="role" name="role" placeholder="--Choisissez un rôle--">
+          <option value="" disabled selected>--Choisissez un rôle--</option>
+          <option value="PARTICULAR">Particulier</option>
+          <option value="PROFESIONAL">Professionnel</option>
+        </select>
+        <i class="pi pi-chevron-down"></i>
+      </div>
+    </div>
+    <div class="accept-terms">
+      <input type="checkbox" class="custom-checkbox" (change)="acceptTerms()" />
+      <p>
+        J’accepte que Airventure m’envoie des emails occasionnels en accord avec la politique de
+        confidentialité
+      </p>
+    </div>
+    <button *ngIf="termsAccepted" class="auth-button" type="submit">Continuer</button>
+    <button *ngIf="!termsAccepted" class="auth-button disabled">Continuer</button>
+  </form>
 </div>

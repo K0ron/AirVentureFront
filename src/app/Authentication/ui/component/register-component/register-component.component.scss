@@ -10,7 +10,7 @@
 }
 
 .custom-checkbox {
-  width: 36px;
+  width: 44px;
   height: 22px;
   border: 1px solid rgba(69, 96, 84, 1);
   border-radius: 4px;
@@ -32,4 +32,126 @@
   top: 50%; /* Centrer verticalement */
   left: 50%; /* Centrer horizontalement */
   transform: translate(-50%, -50%); /* Ajuste la position pour que le carré soit bien centré */
+}
+
+.register-container {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: 30px;
+}
+
+.password-container {
+  display: flex;
+  width: 100%;
+  gap: 5px;
+}
+
+.name-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+
+.name-input {
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid rgba(192, 192, 192, 1);
+  padding-left: 21px;
+}
+
+.input-container {
+  height: 77px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  .label-password {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+  }
+  .tooltip-container {
+    position: relative; /* Position relative pour le conteneur */
+    display: inline-block; /* Affichage en ligne pour le conteneur */
+  }
+
+  .tooltip {
+    display: inline-block; /* Affichage en ligne pour l'icône */
+    position: relative; /* Position relative pour l'icône */
+    cursor: pointer; /* Change le curseur pour indiquer que c'est interactif */
+  }
+
+  .tooltip-text {
+    visibility: hidden; /* Masquer par défaut */
+    width: 220px; /* Largeur de la tooltip */
+    background-color: #555; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    text-align: center; /* Centrer le texte */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 5px; /* Espacement autour du texte */
+    position: absolute; /* Positionner par rapport à l'icône */
+    z-index: 1; /* Assurez-vous qu'elle est au-dessus des autres éléments */
+    bottom: 125%; /* Positionner au-dessus de l'icône */
+    left: 50%; /* Centrer horizontalement */
+    margin-left: -110px; /* Ajuster pour centrer */
+    opacity: 0; /* Masquer par défaut */
+    transition: opacity 0.3s; /* Transition pour l'effet d'apparition */
+  }
+
+  .tooltip:hover .tooltip-text {
+    visibility: visible; /* Afficher lors du survol */
+    opacity: 1; /* Rendre visible */
+  }
+}
+.input-error {
+  border: 1px solid red;
+  border-radius: 4px;
+  height: 50px;
+}
+
+:host ::ng-deep .p-password {
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid rgba(192, 192, 192, 1);
+  padding-left: 21px;
+  margin-bottom: 24px;
+}
+
+:host ::ng-deep .p-icon {
+  width: 19px;
+  position: absolute; // Positionne l'icône de manière absolue
+  left: 150px; // Espace à droite
+  top: 50%; // Centre verticalement
+  transform: translateY(-50%);
+}
+
+.custom-select {
+  position: relative;
+  width: 420px;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid rgba(192, 192, 192, 1);
+
+  select {
+    width: 100%;
+    height: 50px;
+    padding-left: 21px;
+    appearance: none;
+    background: none;
+    border: none;
+  }
+
+  .pi {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    pointer-events: none;
+  }
 }

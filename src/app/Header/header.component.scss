@@ -94,4 +94,23 @@ p-dialog {
       align-content: center;
     }
   }
+
+  ::ng-deep .p-dialog-mask {
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .auth-subtile {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    color: rgba(151, 151, 151, 1);
+    margin-top: 24px;
+    gap: 5px;
+
+    .auth-link {
+      color: rgba(25, 25, 25, 1);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }

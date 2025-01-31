@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { CommonModule } from '@angular/common';
@@ -32,16 +32,33 @@ export class HeaderComponent {
   showModalLogin: boolean = false;
   checked: boolean = false;
 
+  @ViewChild(RegisterComponentComponent) registerComponent!: RegisterComponentComponent;
+
+  resetRegisterForm() {
+    if (this.registerComponent) {
+      this.registerComponent.registerForm.reset({
+        role: '',
+      });
+    }
+  }
+
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
 
   toggleModalRegister() {
     this.showModalRegister = !this.showModalRegister;
+    this.showModalLogin = false;
+    if (!this.showModalRegister) {
+      this.resetRegisterForm();
+    }
+
+    console.log('LOGIN MODAL STATE', this.showModalRegister);
   }
 
   toggleModalLogin() {
     this.showModalLogin = !this.showModalLogin;
+    this.showModalRegister = false;
     console.log('LOGIN MODAL STATE', this.showModalLogin);
   }
 }
