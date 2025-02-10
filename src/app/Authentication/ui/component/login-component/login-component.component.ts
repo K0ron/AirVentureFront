@@ -1,3 +1,4 @@
+import { CookieService } from './../../../domain/services/cookie.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -27,6 +28,7 @@ import { LoginRequestDto } from '../../../domain/dto/login-request.dto';
 })
 export class LoginComponentComponent {
   @Output() loginSuccess = new EventEmitter<void>();
+  @Output() isLoggedIn = new EventEmitter<boolean>();
   loginForm: FormGroup;
   errorMessage: string = '';
   showPassword: boolean = false;
@@ -34,7 +36,8 @@ export class LoginComponentComponent {
   constructor(
     private authService: AuthenticationControllerService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cookieService: CookieService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -49,10 +52,24 @@ export class LoginComponentComponent {
         this.loginForm.get('password')?.value
       );
       this.authService.login(loginDto).subscribe({
-        next: (response: HttpResponse<any>) => {
+        next: (response) => {
           console.log('Login successful', response);
+          console.log('Response body', response.token);
           console.log('Cookies', document.cookie);
           console.log('Emitting login success event');
+
+          this.cookieService.setCookie(response.token);
+
+          this.authService.getCurrentUser().subscribe({
+            next: (userDate) => {
+              console.log('Current user', userDate);
+              this.isLoggedIn.emit(true);
+            },
+            error: (error) => {
+              console.error('Failed to get current user:', error);
+            },
+          });
+
           this.loginSuccess.emit();
           this.router.navigate(['/activities']);
         },

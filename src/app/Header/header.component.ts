@@ -31,6 +31,7 @@ export class HeaderComponent {
   showModalRegister: boolean = false;
   showModalLogin: boolean = false;
   checked: boolean = false;
+  isLoggedIn: boolean = false;
 
   @ViewChild(RegisterComponentComponent) registerComponent!: RegisterComponentComponent;
 
@@ -60,5 +61,10 @@ export class HeaderComponent {
     this.showModalLogin = !this.showModalLogin;
     this.showModalRegister = false;
     console.log('LOGIN MODAL STATE', this.showModalLogin);
+  }
+
+  onLoginSucess() {
+    this.isLoggedIn = true;
+    console.log('IS LOGGED IN', this.isLoggedIn);
   }
 }
