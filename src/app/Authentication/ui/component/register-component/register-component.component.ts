@@ -84,7 +84,7 @@ export class RegisterComponentComponent implements OnInit {
           }
           console.log('register failed', error);
           this.errorMessage = error.error || 'An error occured during register.';
-          console.log('Error details:', error.error); // Ajoutez cette ligne pour voir les détails
+          console.log('Error details:', error.error);
         },
       });
     }
@@ -95,6 +95,15 @@ export class RegisterComponentComponent implements OnInit {
       next: (response) => {
         console.log('Login successful', response);
         console.log('Cookies', document.cookie);
+
+        this.authService.getCurrentUser().subscribe({
+          next: (userDate) => {
+            console.log('Current user', userDate);
+          },
+          error: (error) => {
+            console.error('Failed to get current user date:', error);
+          },
+        });
         this.router.navigate(['/activities']);
       },
       error: (error) => {

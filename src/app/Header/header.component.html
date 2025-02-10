@@ -1,8 +1,24 @@
 <div class="header-container">
   <img class="logo" src="assets/airVentureLogo.svg" alt="logo_airventure" />
+  <div class="search-bar-container">
+    <div class="search-input">
+      <img src="assets/ic-search.svg" alt="" />
+      <input type="text" placeholder="Recherche par mots-clé" />
+    </div>
+    <div class="search-input">
+      <img src="assets/ic-contact-map-pin.svg" alt="" />
+      <input type="text" placeholder="Recherche par lieu" />
+    </div>
+  </div>
 
   <div class="login-menu-container">
-    <button class="register-button" (click)="toggleModalRegister()">S'inscrire</button>
+    <button *ngIf="!isLoggedIn" class="menu-button">
+      <img src="assets/Burger-Menu.svg" alt="" />
+    </button>
+
+    <button *ngIf="isLoggedIn" class="register-button" (click)="toggleModalRegister()">
+      S'inscrire
+    </button>
     <!-- REGISTER MODAL -->
     <p-dialog
       [(visible)]="showModalRegister"
@@ -28,7 +44,9 @@
     <!--#############-->
 
     <!-- LOGIN MODAL -->
-    <button class="login-button" (click)="toggleModalLogin()">Se connecter</button>
+    <button *ngIf="isLoggedIn" class="login-button" (click)="toggleModalLogin()">
+      Se connecter
+    </button>
 
     <p-dialog
       [(visible)]="showModalLogin"
@@ -45,7 +63,7 @@
         <h1 class="register-title">se connecter</h1>
         <button (click)="toggleModalLogin()"><i class="pi pi-times"></i></button>
       </div>
-      <app-login-component (loginSuccess)="toggleModalLogin()" />
+      <app-login-component (loginSuccess)="toggleModalLogin()" (isLoggedIn)="onLoginSucess()" />
       <div class="auth-subtile">
         Pas encore membre ?
         <span class="auth-link" (click)="toggleModalRegister()">s'inscrire</span>

@@ -7,12 +7,14 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withFetch,
+  withInterceptors,
   withXsrfConfiguration,
 } from '@angular/common/http';
 import { CredentialsInterceptor } from './core/interceptors/credentials.interceptor';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { CookieAuthInterceptor } from './core/interceptors/cookie-auth.interceptor';
 import { providePrimeNG } from 'primeng/config';
+import { ApiModule, Configuration } from './Swagger/configurations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +23,9 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     providePrimeNG({}),
+    provideHttpClient(withInterceptors([])), // Active HttpClient
+    { provide: Configuration, useValue: new Configuration({ withCredentials: true }) }, // Active credentials pour Swagger
+    ApiModule,
     provideHttpClient(
       withFetch(),
       withXsrfConfiguration({
