@@ -8,6 +8,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponentComponent } from '../Authentication/ui/component/register-component/register-component.component';
 import { LoginComponentComponent } from '../Authentication/ui/component/login-component/login-component.component';
+import { SearchBarComponent } from './component/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ import { LoginComponentComponent } from '../Authentication/ui/component/login-co
     FormsModule,
     RegisterComponentComponent,
     LoginComponentComponent,
+    SearchBarComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

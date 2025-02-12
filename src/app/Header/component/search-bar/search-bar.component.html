@@ -1,0 +1,25 @@
+<div class="search-bar-container">
+  <div class="search-input">
+    <button (click)="onSearchActivityByName()">
+      <img src="assets/ic-search.svg" alt="Recherche" />
+    </button>
+    <input
+      type="text"
+      placeholder="Recherche par mots-clé"
+      [(ngModel)]="enteredActivityNameValue"
+      (keyup.enter)="onSearchActivityByName()"
+    />
+  </div>
+  <p-divider layout="vertical" />
+  <div class="search-input">
+    <button (click)="onSearchActivityByCity()">
+      <img src="assets/ic-contact-map-pin.svg" alt="" />
+    </button>
+    <input
+      type="text"
+      placeholder="Recherche par lieu"
+      [(ngModel)]="enteredCityValue"
+      (keyup.enter)="onSearchActivityByCity()"
+    />
+  </div>
+</div>

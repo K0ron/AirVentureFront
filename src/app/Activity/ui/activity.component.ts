@@ -1,3 +1,4 @@
+import { SearchService } from './../../Header/domain/services/search.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivityControllerService } from '../../Swagger/api/activityController.service';
 import { Activity } from '../../Swagger/models/activity';
@@ -15,18 +16,31 @@ import { SearchCategoriesComponent } from './component/search-categories/search-
   styleUrl: './activity.component.scss',
 })
 export class ActivityComponent implements OnInit {
-  public activities: Activity[] = [];
-  showFilter: boolean = false;
-  titleCategory: string = '';
-  filtredActivities = [...this.activities];
-  constructor(private activityService: ActivityControllerService) {}
+  public allActivities: Activity[] = [];
+  public filtredActivities: Activity[] = [];
+  public showFilter: boolean = false;
+  public titleCategory: string = '';
+
+  constructor(
+    private activityService: ActivityControllerService,
+    private searchService: SearchService
+  ) {}
 
   ngOnInit(): void {
-    this.showFilter = false;
-    console.log('filter= ', this.showFilter);
+    this.loadActivities();
 
     console.log('LOG TEST');
 
+    this.searchService.searchName$.subscribe((searchQuery: string) => {
+      this.filterActivities(searchQuery);
+    });
+
+    this.searchService.searchCity$.subscribe((searchQuery: string) => {
+      this.filterActivities(searchQuery);
+    });
+  }
+
+  private loadActivities(): void {
     this.activityService.getAll().subscribe((data) => {
       const activitiesWithPictures$ = data.map((activity) =>
         this.activityService
@@ -36,7 +50,8 @@ export class ActivityComponent implements OnInit {
 
       forkJoin(activitiesWithPictures$).subscribe({
         next: (enrichedActivities) => {
-          this.activities = enrichedActivities;
+          this.allActivities = enrichedActivities;
+          this.filtredActivities = [...this.allActivities];
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des activités ou des images :', err);
@@ -46,31 +61,31 @@ export class ActivityComponent implements OnInit {
     });
   }
 
-  getActivitiesByCategory(catgory: string): void {
-    this.activityService.getActivitiesByCategory(catgory).subscribe((data) => {
-      const activitiesWithPictures$ = data.map((activity) =>
-        this.activityService
-          .getActivityPictures(activity.id!)
-          .pipe(map((pictures) => ({ ...activity, pictures })))
-      );
-      forkJoin(activitiesWithPictures$).subscribe({
-        next: (enrichedActivities) => {
-          this.activities = enrichedActivities;
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération des activités ou des images :', err);
-        },
-      });
-      console.log('Activities By category ', data);
+  private filterActivities(nameQuery?: string | null, cityQuery?: string | null): void {
+    const filtered = this.allActivities.filter((activity) => {
+      const matchesName = nameQuery
+        ? activity.name?.toLocaleLowerCase().includes(nameQuery.toLocaleLowerCase())
+        : true;
+      const macthesCity = cityQuery
+        ? activity.city?.toLocaleLowerCase().includes(cityQuery.toLocaleLowerCase())
+        : true;
+      return matchesName && macthesCity;
     });
+
+    this.filtredActivities = filtered;
+    this.filtredActivities = filtered;
+
+    this.noActivitiesMessage =
+      this.filtredActivities.length === 0 ? 'Aucune Activité ne correspond à votre recherche' : '';
   }
 
   onCategorySelected(category: string | null): void {
     console.log('Catégorie sélectionnée:', category);
     if (category) {
-      this.filtredActivities = this.activities.filter((activity) => activity.category === category);
+      this.filtredActivities = this.allActivities.filter(
+        (activity) => activity.category === category
+      );
       this.showFilter = true;
-      console.log('filter= ', this.showFilter);
       this.titleCategory = category;
       console.log('CATEG = ', this.titleCategory);
     } else {
