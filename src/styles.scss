@@ -40,3 +40,23 @@ body {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.gray-font {
+  color: rgba(192, 192, 192, 1);
+}
+
+.bold-font {
+  font-weight: bold;
+}
+
+.action-button {
+  width: 320px;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgba(69, 96, 84, 1);
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
