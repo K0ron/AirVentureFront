@@ -17,6 +17,8 @@ export interface PreReservation {
     reservedAt?: Date;
     expirationDate?: Date;
     totalPrice?: number;
+    participants?: number;
+    dateOfActivity?: Date;
     status?: PreReservation.StatusEnum;
     users?: Array<User>;
     activities?: Array<Activity>;

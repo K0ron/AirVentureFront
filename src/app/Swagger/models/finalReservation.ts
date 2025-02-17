@@ -17,6 +17,8 @@ export interface FinalReservation {
     reservedAt?: Date;
     totalPrice?: number;
     payementDate?: Date;
+    participants?: number;
+    dateOfActivity?: Date;
     users?: Array<User>;
     activities?: Array<Activity>;
     status?: FinalReservation.StatusEnum;

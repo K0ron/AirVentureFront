@@ -1,1 +1,104 @@
-<p>reservation works!</p>
+<div>
+  <div class="hero-image" [ngStyle]="{ 'background-image': 'url(' + imgUrls[0] + ')' }">
+    <div class="hero-text">
+      <p>{{ activity.name }}</p>
+    </div>
+  </div>
+  <div class="reservation-container">
+    <div class="activity-info">
+      <p class="bold-font">{{ activity.price }} € / personne</p>
+      <p class="gray-font">{{ activity.city }} | {{ activity.duration }} h</p>
+      <p class="gray-font">{{ activity.category }}</p>
+    </div>
+    <div class="info-container">
+      <div class="all-activity">
+        <div class="title-container">
+          <p>DESCRIPTION</p>
+          <p>TARIFS</p>
+          <p>LIEU</p>
+          <p>INFORMATIONS</p>
+        </div>
+        <p-divider layout="horizontal" />
+        <div class="text-container">
+          <p>Description</p>
+          <div>{{ activity.description }}</div>
+        </div>
+        <p-divider layout="horizontal" />
+        <div class="text-container">
+          <p>Tarifs</p>
+          <div>Basse saison (Octobre à Mai): {{ activity.price }} €</div>
+          <div>Haute saison (Juin à Septembre): {{ activity.price }} €</div>
+        </div>
+        <p-divider layout="horizontal" />
+        <div class="text-container">
+          <p>Lieu</p>
+          <div>Adresse : {{ activity.adress }}, {{ activity.zipCode }} {{ activity.city }}</div>
+          <button
+            class="action-button"
+            (click)="openGoogleMaps(activity.adress, activity.zipCode, activity.city)"
+          >
+            Voir sur la carte
+          </button>
+        </div>
+        <p-divider layout="horizontal" />
+        <div class="text-container">
+          <p>Informations</p>
+          <div>{{ activity.category }}</div>
+        </div>
+        <p-divider layout="horizontal" />
+      </div>
+      <div class="selection-container">
+        <div class="custom-select">
+          <img src="assets/ic-actions-user-noir.svg" alt="" />
+          <select
+            name="numberOfParticipants"
+            id=""
+            [(ngModel)]="selectedParticipants"
+            (ngModelChange)="calculateTotalPrice()"
+          >
+            <option value="0" disabled>Nombre de participants</option>
+            <option *ngFor="let i of participantsOptions" [value]="i">{{ i }}</option>
+          </select>
+        </div>
+
+        <p-datepicker
+          [(ngModel)]="selectedDate"
+          [inline]="true"
+          [dateFormat]="'dd/mm/yy'"
+          (onSelect)="getFormattedDate()"
+        />
+        <!-- <div class="custom-select">
+          <img src="assets/ic-time.svg" alt="" />
+          <select name="numberOfParticipants" id="">
+            <option value="" disabled selected>Choix de l'horaire</option>
+            <option *ngFor="let i of participantsOptions" [value]="i">{{ i }}</option>
+          </select>
+        </div> -->
+        <div class="recap-container">
+          <p>Récapitulatif :</p>
+          <div class="info-resa">
+            <p>{{ selectedParticipants }} personnes</p>
+            <p-divider layout="vertical" />
+            <p>{{ selectedDate | date : 'dd/MM/yyyy' }}</p>
+          </div>
+
+          <div class="total-price">
+            <div [style]="{ 'font-weight': 'bold', 'font-size': '30px' }">{{ totalPrice }} €</div>
+            <div [style]="{ color: 'rgba(192, 192, 192, 1)', 'font-size': '16px' }">
+              {{ activity.price }} € / personne
+            </div>
+          </div>
+          <button class="action-button" (click)="onSubmit()">Reserver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="photos-container">
+    <p>Photos de l'activité</p>
+    <div class="pictures">
+      <img [src]="imgUrls[1]" alt="images" />
+      <img [src]="imgUrls[2]" alt="images" />
+      <img [src]="imgUrls[3]" alt="images" />
+    </div>
+  </div>
+</div>
