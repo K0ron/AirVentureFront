@@ -15,6 +15,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { response } from 'express';
 
 @Component({
   selector: 'app-reservation',
@@ -45,7 +46,7 @@ export class ReservationComponent implements OnInit {
   ) {
     this.reservationForm = this.formBuilder.group({
       dateOfActivity: [this.selectedDate, Validators.required],
-      numberOfParticipants: [this.selectedParticipants, Validators.required],
+      participants: [this.selectedParticipants, Validators.required],
       totalPrice: [this.totalPrice, Validators.required],
       reservedAt: [new Date(), Validators.required],
       status: ['PENDING', Validators.required],
@@ -106,11 +107,16 @@ export class ReservationComponent implements OnInit {
   calculateTotalPrice(): void {
     if (this.selectedParticipants !== undefined) {
       this.totalPrice = this.selectedParticipants * this.activity.price!;
-      console.log(this.totalPrice);
+      console.log('TOTAL PRICE ', this.totalPrice);
+      console.log('SELECTED PARTICIPANTS ', this.selectedParticipants);
     } else {
       this.totalPrice = 0;
       console.log('Nombre de participants non sélectionné');
     }
+  }
+
+  setActivityToStorage(activity: Activity): void {
+    localStorage.setItem('activityId', String(activity.id));
   }
 
   onSubmit(): void {
@@ -118,24 +124,25 @@ export class ReservationComponent implements OnInit {
       this.calculateTotalPrice();
       this.reservationForm.patchValue({
         dateOfActivity: this.selectedDate,
-        numberOfParticipants: this.selectedParticipants,
+        participants: this.selectedParticipants,
         totalPrice: this.totalPrice,
         reservedAt: new Date(),
         status: 'PENDING',
       });
       const reservationDate = this.reservationForm.value;
-
       console.log('Form submitted : ', reservationDate);
 
       this.preReservationService.createPreReservation(reservationDate).subscribe(
         (response) => {
           console.log('Pre-reservation created : ', response);
+          this.setActivityToStorage(this.activity);
+
+          this.router.navigate(['payment', response.id]);
         },
         (error) => {
           console.error('Error creating pre-reservation : ', error);
         }
       );
-      this.router.navigate(['payment']);
     } else {
       console.log('Form is invalid');
       console.log('FORM VALUE', this.reservationForm.value);

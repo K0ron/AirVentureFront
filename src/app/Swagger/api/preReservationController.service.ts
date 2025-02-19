@@ -180,22 +180,22 @@ export class PreReservationControllerService {
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
-  public gerOnePreReservation(
+  public getOnePreReservation(
     id: number,
     observe?: 'body',
     reportProgress?: boolean
   ): Observable<PreReservation>;
-  public gerOnePreReservation(
+  public getOnePreReservation(
     id: number,
     observe?: 'response',
     reportProgress?: boolean
   ): Observable<HttpResponse<PreReservation>>;
-  public gerOnePreReservation(
+  public getOnePreReservation(
     id: number,
     observe?: 'events',
     reportProgress?: boolean
   ): Observable<HttpEvent<PreReservation>>;
-  public gerOnePreReservation(
+  public getOnePreReservation(
     id: number,
     observe: any = 'body',
     reportProgress: boolean = false
