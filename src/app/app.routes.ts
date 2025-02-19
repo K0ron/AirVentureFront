@@ -6,6 +6,8 @@ import { ReservationComponent } from './Reservation/ui/reservation.component';
 import { ProfileComponent } from './Profile/ui/profile.component';
 import { PaymentComponent } from './Payment/ui/payment.component';
 import { HomeComponent } from './Home/ui/home.component';
+import { PaymentSuccessComponent } from './Payment/ui/components/payment-success/payment-success.component';
+import { PaymentCancelComponent } from './Payment/ui/components/payment-cancel/payment-cancel.component';
 
 export const routes: Routes = [
   { path: 'login', component: AuthenticationComponent },
@@ -13,6 +15,8 @@ export const routes: Routes = [
   { path: 'activities', component: ActivityComponent },
   { path: 'reservation/:id', component: ReservationComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'payment', component: PaymentComponent },
+  { path: 'payment/:id', component: PaymentComponent },
+  { path: 'success', component: PaymentSuccessComponent },
+  { path: 'cancel', component: PaymentCancelComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
