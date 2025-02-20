@@ -1,1 +1,14 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <div class="menu-container">
+    <app-profile-card [currentUser]="currentUser" />
+    <app-profile-menu />
+    <button>Deconnexion</button>
+  </div>
+  <div>
+    <div class="title-container">
+      <h1>Mes informations</h1>
+      <p-divider />
+    </div>
+    <app-user-info [currentUser]="currentUser" />
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponentComponent } from '../Authentication/ui/component/register-component/register-component.component';
 import { LoginComponentComponent } from '../Authentication/ui/component/login-component/login-component.component';
 import { SearchBarComponent } from './component/search-bar/search-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -36,6 +37,8 @@ export class HeaderComponent {
   isLoggedIn: boolean = false;
 
   @ViewChild(RegisterComponentComponent) registerComponent!: RegisterComponentComponent;
+
+  constructor(private router: Router) {}
 
   resetRegisterForm() {
     if (this.registerComponent) {
@@ -68,5 +71,9 @@ export class HeaderComponent {
   onLoginSucess() {
     this.isLoggedIn = true;
     console.log('IS LOGGED IN', this.isLoggedIn);
+  }
+
+  goToHome() {
+    this.router.navigate(['/']);
   }
 }

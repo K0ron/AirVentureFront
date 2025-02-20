@@ -1,0 +1,51 @@
+.profile-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 79px;
+  margin: 18px 81px 0 81px;
+}
+
+.menu-container {
+  width: 361px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  button {
+    width: 100%;
+    height: 78px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(249, 242, 232, 1);
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(69, 96, 84, 1);
+    text-align: left;
+    padding-left: 32px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(69, 96, 84, 1);
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 47px;
+  width: 910px;
+  margin-bottom: 16px;
+  margin-top: 40px;
+  h1 {
+    font-size: 50px;
+    font-weight: 400;
+    font-family: 'BigNoodleTitling', sans-serif;
+    color: rgba(69, 96, 84, 1);
+  }
+  ::ng-deep .p-divider.p-divider-horizontal {
+    color: transparent !important;
+    border: 1px solid rgba(216, 216, 216, 1);
+  }
+}

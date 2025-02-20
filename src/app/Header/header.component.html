@@ -1,17 +1,18 @@
 <div class="header-container">
-  <img class="logo" src="assets/airVentureLogo.svg" alt="logo_airventure" />
+  <img class="logo" src="assets/airVentureLogo.svg" alt="logo_airventure" (click)="goToHome()" />
   <div class="search-bar">
-    <app-search-bar />
+    <app-search-bar *ngIf="isLoggedIn" />
   </div>
 
   <div class="login-menu-container">
-    <button *ngIf="!isLoggedIn" class="menu-button">
+    <button *ngIf="isLoggedIn" class="menu-button">
       <img src="assets/Burger-Menu.svg" alt="" />
     </button>
+    <div class="auth-button-container" *ngIf="!isLoggedIn">
+      <button class="register-button" (click)="toggleModalRegister()">S'inscrire</button>
+      <button class="login-button" (click)="toggleModalLogin()">Se connecter</button>
+    </div>
 
-    <button *ngIf="isLoggedIn" class="register-button" (click)="toggleModalRegister()">
-      S'inscrire
-    </button>
     <!-- REGISTER MODAL -->
     <p-dialog
       [(visible)]="showModalRegister"
@@ -37,9 +38,6 @@
     <!--#############-->
 
     <!-- LOGIN MODAL -->
-    <button *ngIf="isLoggedIn" class="login-button" (click)="toggleModalLogin()">
-      Se connecter
-    </button>
 
     <p-dialog
       [(visible)]="showModalLogin"

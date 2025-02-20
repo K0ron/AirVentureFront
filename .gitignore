@@ -44,3 +44,7 @@ Thumbs.db
 # Mkcert 
 localhost.pem
 localhost-key.pem
+
+# Environment
+environment.ts
+environment.prod.ts
