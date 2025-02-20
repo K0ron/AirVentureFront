@@ -16,11 +16,11 @@ import { CustomHttpUrlEncodingCodec } from '../configurations/encoder';
 
 import { Observable } from 'rxjs';
 
+import { CurrentUserDTO } from '../models/currentUserDTO';
 import { User } from '../models/user';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../configurations/variables';
 import { Configuration } from '../configurations/configuration';
-import { CurrentUserDTO } from '../models/currentUserDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +56,43 @@ export class AuthenticationControllerService {
       }
     }
     return false;
+  }
+
+  /**
+   *
+   *
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public getCurrentUser(observe?: 'body', reportProgress?: boolean): Observable<CurrentUserDTO>;
+  public getCurrentUser(
+    observe?: 'response',
+    reportProgress?: boolean
+  ): Observable<HttpResponse<CurrentUserDTO>>;
+  public getCurrentUser(
+    observe?: 'events',
+    reportProgress?: boolean
+  ): Observable<HttpEvent<CurrentUserDTO>>;
+  public getCurrentUser(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    let headers = this.defaultHeaders;
+
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = ['*/*'];
+    const httpHeaderAcceptSelected: string | undefined =
+      this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [];
+
+    return this.httpClient.request<CurrentUserDTO>('get', `${this.basePath}/auth/me`, {
+      withCredentials: this.configuration.withCredentials,
+      headers: headers,
+      observe: observe,
+      reportProgress: reportProgress,
+    });
   }
 
   /**
@@ -193,43 +230,6 @@ export class AuthenticationControllerService {
 
     return this.httpClient.request<any>('post', `${this.basePath}/register`, {
       body: body,
-      withCredentials: this.configuration.withCredentials,
-      headers: headers,
-      observe: observe,
-      reportProgress: reportProgress,
-    });
-  }
-
-  /**
-   *
-   *
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public getCurrentUser(observe?: 'body', reportProgress?: boolean): Observable<CurrentUserDTO>;
-  public getCurrentUser(
-    observe?: 'response',
-    reportProgress?: boolean
-  ): Observable<HttpResponse<CurrentUserDTO>>;
-  public getCurrentUser(
-    observe?: 'events',
-    reportProgress?: boolean
-  ): Observable<HttpEvent<CurrentUserDTO>>;
-  public getCurrentUser(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-    let headers = this.defaultHeaders;
-
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = ['*/*'];
-    const httpHeaderAcceptSelected: string | undefined =
-      this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
-    }
-
-    // to determine the Content-Type header
-    const consumes: string[] = [];
-
-    return this.httpClient.request<CurrentUserDTO>('get', `${this.basePath}/auth/me`, {
       withCredentials: this.configuration.withCredentials,
       headers: headers,
       observe: observe,
