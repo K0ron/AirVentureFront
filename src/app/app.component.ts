@@ -6,6 +6,7 @@ import { HeaderComponent } from './Header/header.component';
 import { ReservationComponent } from './Reservation/ui/reservation.component';
 import { FooterComponent } from './Footer/footer.component';
 import { PaymentComponent } from './Payment/ui/payment.component';
+import { ProfileComponent } from './Profile/ui/profile.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { PaymentComponent } from './Payment/ui/payment.component';
     ReservationComponent,
     FooterComponent,
     PaymentComponent,
+    ProfileComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

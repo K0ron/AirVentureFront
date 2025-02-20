@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
@@ -45,9 +46,7 @@ export class PaymentComponent implements OnInit {
   ) {}
 
   async ngAfterViewInit() {
-    this.stripe = await loadStripe(
-      'pk_test_51QOij5CatZMCoARfvaDpA4DXaaRqnQ961sOfjArl2hCzV5TtP9O9G6zTrOR5hOrtWHYbEYKNSVofut3p3RJRrJjF00FhDPeRea'
-    );
+    this.stripe = await loadStripe(environment.stripePublicKey);
     const elements = this.stripe!.elements();
     this.card = elements.create('card');
   }

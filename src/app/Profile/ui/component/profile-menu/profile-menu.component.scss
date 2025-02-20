@@ -1,0 +1,56 @@
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  button {
+    position: relative;
+    width: 100%;
+    height: 78px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(249, 242, 232, 1);
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(69, 96, 84, 1);
+    text-align: left;
+    padding-left: 32px;
+    cursor: pointer;
+    .pi {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(249, 242, 232, 1);
+    }
+    &:hover {
+      background-color: rgba(69, 96, 84, 1);
+      color: rgba(255, 255, 255, 1);
+      .pi {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+
+  ::ng-deep .p-divider.p-divider-horizontal {
+    color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 1);
+    width: 325px;
+    align-self: center;
+  }
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(249, 242, 232, 1);
+  height: 245px;
+  border-radius: 4px;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(249, 242, 232, 1);
+  height: 161px;
+  border-radius: 4px;
+}

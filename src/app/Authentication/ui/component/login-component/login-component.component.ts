@@ -63,6 +63,7 @@ export class LoginComponentComponent {
           this.authService.getCurrentUser().subscribe({
             next: (userDate) => {
               console.log('Current user', userDate);
+              localStorage.setItem('userId', String(userDate.id));
               this.isLoggedIn.emit(true);
             },
             error: (error) => {
