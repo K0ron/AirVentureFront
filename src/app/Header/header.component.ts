@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { CommonModule } from '@angular/common';
@@ -29,7 +29,7 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   menuOpen = false;
   showModalRegister: boolean = false;
   showModalLogin: boolean = false;
@@ -39,6 +39,26 @@ export class HeaderComponent {
   @ViewChild(RegisterComponentComponent) registerComponent!: RegisterComponentComponent;
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.checkLoginStatus();
+  }
+
+  checkLoginStatus() {
+    const token = this.getCookie('token');
+    if (token) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  }
+
+  getCookie(name: string): string | null {
+    const value = `;${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+    return null;
+  }
 
   resetRegisterForm() {
     if (this.registerComponent) {
@@ -66,11 +86,6 @@ export class HeaderComponent {
     this.showModalLogin = !this.showModalLogin;
     this.showModalRegister = false;
     console.log('LOGIN MODAL STATE', this.showModalLogin);
-  }
-
-  onLoginSucess() {
-    this.isLoggedIn = true;
-    console.log('IS LOGGED IN', this.isLoggedIn);
   }
 
   goToHome() {

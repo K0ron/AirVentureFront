@@ -54,7 +54,7 @@
         <h1 class="register-title">se connecter</h1>
         <button (click)="toggleModalLogin()"><i class="pi pi-times"></i></button>
       </div>
-      <app-login-component (loginSuccess)="toggleModalLogin()" (isLoggedIn)="onLoginSucess()" />
+      <app-login-component (loginSuccess)="toggleModalLogin()" (isLoggedIn)="checkLoginStatus()" />
       <div class="auth-subtile">
         Pas encore membre ?
         <span class="auth-link" (click)="toggleModalRegister()">s'inscrire</span>

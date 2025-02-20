@@ -24,7 +24,6 @@ import { TooltipModule } from 'primeng/tooltip';
   styleUrl: './register-component.component.scss',
 })
 export class RegisterComponentComponent implements OnInit {
-  @Output() registerSuccess = new EventEmitter<void>();
   registerForm: FormGroup;
   errorMessage: string = '';
   termsAccepted: boolean = false;
@@ -76,7 +75,6 @@ export class RegisterComponentComponent implements OnInit {
             this.registerForm.get('email')?.value,
             this.registerForm.get('password')?.value
           );
-          this.registerSuccess.emit();
         },
         error: (error) => {
           if (this.termsAccepted == false) {
@@ -104,7 +102,9 @@ export class RegisterComponentComponent implements OnInit {
             console.error('Failed to get current user date:', error);
           },
         });
-        this.router.navigate(['/activities']);
+        this.router.navigate(['/activities']).then(() => {
+          window.location.reload();
+        });
       },
       error: (error) => {
         console.log('Login failed:', error);

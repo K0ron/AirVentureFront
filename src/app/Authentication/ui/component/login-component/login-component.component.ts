@@ -27,8 +27,6 @@ import { LoginRequestDto } from '../../../domain/dto/login-request.dto';
   styleUrl: './login-component.component.scss',
 })
 export class LoginComponentComponent {
-  @Output() loginSuccess = new EventEmitter<void>();
-  @Output() isLoggedIn = new EventEmitter<boolean>();
   loginForm: FormGroup;
   errorMessage: string = '';
   showPassword: boolean = false;
@@ -64,15 +62,15 @@ export class LoginComponentComponent {
             next: (userDate) => {
               console.log('Current user', userDate);
               localStorage.setItem('userId', String(userDate.id));
-              this.isLoggedIn.emit(true);
             },
             error: (error) => {
               console.error('Failed to get current user:', error);
             },
           });
 
-          this.loginSuccess.emit();
-          this.router.navigate(['/activities']);
+          this.router.navigate(['/activities']).then(() => {
+            window.location.reload();
+          });
         },
         error: (error) => {
           console.error('Login failed:', error);
