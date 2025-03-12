@@ -21,8 +21,6 @@ export class HomeComponent implements OnInit {
   constructor(private activityService: ActivityControllerService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('LOG TEST');
-
     this.activityService.getAll().subscribe((data) => {
       const activitiesWithPictures$ = data.map((activity) =>
         this.activityService
@@ -38,7 +36,6 @@ export class HomeComponent implements OnInit {
           console.error('Erreur lors de la récupération des activités ou des images :', err);
         },
       });
-      console.log('LOGS ', data);
     });
   }
 

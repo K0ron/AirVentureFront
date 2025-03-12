@@ -28,9 +28,6 @@ export class ActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadActivities();
-
-    console.log('LOG TEST');
-
     this.searchService.searchName$.subscribe((searchQuery: string) => {
       this.filterActivities(searchQuery);
     });
@@ -57,7 +54,6 @@ export class ActivityComponent implements OnInit {
           console.error('Erreur lors de la récupération des activités ou des images :', err);
         },
       });
-      console.log('LOGS ', data);
     });
   }
 
@@ -80,19 +76,16 @@ export class ActivityComponent implements OnInit {
   }
 
   onCategorySelected(category: string | null): void {
-    console.log('Catégorie sélectionnée:', category);
     if (category) {
       this.filtredActivities = this.allActivities.filter(
         (activity) => activity.category === category
       );
       this.showFilter = true;
       this.titleCategory = category;
-      console.log('CATEG = ', this.titleCategory);
     } else {
       this.showFilter = false;
-      console.log('filter= ', this.showFilter);
     }
-    console.log('Activités filtrées:', this.filtredActivities);
+
     this.checkedActivities();
   }
 

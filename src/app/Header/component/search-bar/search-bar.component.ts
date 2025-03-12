@@ -22,14 +22,12 @@ export class SearchBarComponent {
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((searchQuery) => {
         this.searchService.searchName(searchQuery);
-        console.log('ACTIVITY SEARCH', searchQuery);
       });
 
     this.searchCitySubject
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((searchQuery) => {
         this.searchService.searchCity(searchQuery);
-        console.log('ACTIVITY SEARCH CITY', searchQuery);
       });
   }
 

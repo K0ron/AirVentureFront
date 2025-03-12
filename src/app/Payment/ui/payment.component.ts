@@ -60,7 +60,6 @@ export class PaymentComponent implements OnInit {
       this.preReservationService
         .getOnePreReservation(preReservationId)
         .subscribe((preReservation) => {
-          console.log('Curent Pre-reservation : ', preReservation);
           this.totalPrice = preReservation.totalPrice;
           this.numberOfParticipants = preReservation.participants;
           this.activityDate = this.datePipe.transform(preReservation.dateOfActivity, 'dd/MM/yyyy');
@@ -70,10 +69,8 @@ export class PaymentComponent implements OnInit {
 
   getActivityFromStotage(): void {
     const activityId = +localStorage.getItem('activityId')!;
-    console.log('Activity id : ', activityId);
     this.activityService.getOne(activityId).subscribe((activity) => {
       this.activity = activity;
-      console.log('Current activity : ', this.activity);
 
       this.activityService.getActivityPictures(activityId).subscribe({
         next: (pictures) => {
@@ -90,12 +87,9 @@ export class PaymentComponent implements OnInit {
     const preReservationId = idParam ? +idParam : null;
 
     if (preReservationId) {
-      console.log('Pre-reservation id : ', preReservationId);
-
       this.payementService.createCheckoutSession(preReservationId).subscribe({
         next: (response: any) => {
           if (response && response.url) {
-            console.log('Redirection vers :', response.url);
             window.location.href = response.url; // Redirige vers Stripe Checkout
           } else {
             console.error('Aucune URL Stripe reçue');

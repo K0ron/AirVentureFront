@@ -48,8 +48,6 @@ export class UserInfoComponent {
   }
 
   onSubmit() {
-    console.log('Form submitted', this.updateUserForm.value);
-
     if (this.updateUserForm.valid) {
       const formValues = this.updateUserForm.value;
 
@@ -71,18 +69,10 @@ export class UserInfoComponent {
       if (Object.keys(userUpdateDto).length > 0) {
         if (this.currentUser?.id) {
           this.userService.update(userUpdateDto, this.currentUser.id).subscribe({
-            next: (response) => {
-              console.log('User updated successfully', response);
-            },
-            error: (error) => {
-              console.log('Error updating user', error);
-            },
+            next: (response) => {},
+            error: (error) => {},
           });
-        } else {
-          console.log('User ID is undefined');
         }
-      } else {
-        console.log('No changes to update');
       }
     }
   }
@@ -90,7 +80,6 @@ export class UserInfoComponent {
   updatePassword() {
     const currentPassword = this.updatePasswordForm.value.currentPassword;
     const newPassword = this.updatePasswordForm.value.newPassword;
-    console.log('Password change request:', { currentPassword, newPassword });
     if (currentPassword && newPassword) {
       if (this.currentUser?.id) {
         this.userService
@@ -104,8 +93,6 @@ export class UserInfoComponent {
               console.error('Error updating password', error);
             },
           });
-      } else {
-        console.log('User ID is undefined');
       }
     } else {
       alert('Veuillez entrer un nouveau mot de passe');

@@ -53,12 +53,9 @@ export class RegisterComponentComponent implements OnInit {
 
   acceptTerms() {
     this.termsAccepted = !this.termsAccepted;
-    console.log('TERMS ACCEPTED ', this.termsAccepted);
   }
 
   onSubmit() {
-    console.log('Form submitted', this.registerForm.value);
-
     if (this.registerForm.valid && this.termsAccepted == true) {
       const registerDto = new RegisterRequestDto(
         this.registerForm.get('firstName')?.value,
@@ -67,10 +64,8 @@ export class RegisterComponentComponent implements OnInit {
         this.registerForm.get('password')?.value,
         this.registerForm.get('role')?.value
       );
-      console.log('registerDto', registerDto);
       this.authService.register(registerDto).subscribe({
         next: (response: HttpResponse<any>) => {
-          console.log('Register successful', response);
           this.loginAfterRegistration(
             this.registerForm.get('email')?.value,
             this.registerForm.get('password')?.value
@@ -80,9 +75,7 @@ export class RegisterComponentComponent implements OnInit {
           if (this.termsAccepted == false) {
             this.errorMessage = 'You must accept the terms and conditions';
           }
-          console.log('register failed', error);
           this.errorMessage = error.error || 'An error occured during register.';
-          console.log('Error details:', error.error);
         },
       });
     }
@@ -91,13 +84,8 @@ export class RegisterComponentComponent implements OnInit {
   private loginAfterRegistration(email: string, password: string) {
     this.authService.login({ email, password }).subscribe({
       next: (response) => {
-        console.log('Login successful', response);
-        console.log('Cookies', document.cookie);
-
         this.authService.getCurrentUser().subscribe({
-          next: (userDate) => {
-            console.log('Current user', userDate);
-          },
+          next: (userDate) => {},
           error: (error) => {
             console.error('Failed to get current user date:', error);
           },
@@ -107,7 +95,6 @@ export class RegisterComponentComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.log('Login failed:', error);
         this.errorMessage = error.error || 'An error occured during login.';
       },
     });

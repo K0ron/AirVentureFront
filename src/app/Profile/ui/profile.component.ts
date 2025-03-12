@@ -45,18 +45,15 @@ export class ProfileComponent implements OnInit {
 
     try {
       const decoded: any = jwtDecode(token);
-      console.log('Decoded token:', decoded);
 
       const userEmail = decoded?.sub;
       if (!userEmail) {
-        console.warn('No email found in token');
         return;
       }
 
       this.userService.getUserByEmail(userEmail).subscribe({
         next: (user) => {
           this.currentUser = user;
-          console.log('Current user:', this.currentUser);
         },
         error: (error) => {
           console.error('Failed to get current user:', error);
@@ -77,7 +74,6 @@ export class ProfileComponent implements OnInit {
   logOut(): void {
     this.authService.loggedOut().subscribe({
       next: (response) => {
-        console.log('Logout successful', response);
         document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
         if (this.headerComponent) {
           this.headerComponent.isLoggedIn = false;

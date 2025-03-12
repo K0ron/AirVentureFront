@@ -78,14 +78,11 @@ export class HeaderComponent implements OnInit {
     if (!this.showModalRegister) {
       this.resetRegisterForm();
     }
-
-    console.log('LOGIN MODAL STATE', this.showModalRegister);
   }
 
   toggleModalLogin() {
     this.showModalLogin = !this.showModalLogin;
     this.showModalRegister = false;
-    console.log('LOGIN MODAL STATE', this.showModalLogin);
   }
 
   goToHome() {

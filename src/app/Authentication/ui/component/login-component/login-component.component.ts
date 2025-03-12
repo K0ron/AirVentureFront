@@ -51,16 +51,10 @@ export class LoginComponentComponent {
       );
       this.authService.login(loginDto).subscribe({
         next: (response) => {
-          console.log('Login successful', response);
-          console.log('Response body', response.token);
-          console.log('Cookies', document.cookie);
-          console.log('Emitting login success event');
-
           this.cookieService.setCookie(response.token);
 
           this.authService.getCurrentUser().subscribe({
             next: (userDate) => {
-              console.log('Current user', userDate);
               localStorage.setItem('userId', String(userDate.id));
             },
             error: (error) => {

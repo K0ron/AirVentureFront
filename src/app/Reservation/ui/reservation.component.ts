@@ -59,7 +59,6 @@ export class ReservationComponent implements OnInit {
   }
 
   getFormattedDate(): string {
-    console.log('SELECTED DATE', this.selectedDate);
     return this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy') || '';
   }
 
@@ -80,8 +79,6 @@ export class ReservationComponent implements OnInit {
             const activityWithPicture = { ...activity, pictures };
             this.activity = activityWithPicture;
             this.imgUrls = pictures;
-            console.log('Current activity ', activityWithPicture);
-            console.log('Current pictures ', pictures);
           },
           error: (err) => {
             console.error('Erreur lors de la récupération des images :', err);
@@ -107,11 +104,8 @@ export class ReservationComponent implements OnInit {
   calculateTotalPrice(): void {
     if (this.selectedParticipants !== undefined) {
       this.totalPrice = this.selectedParticipants * this.activity.price!;
-      console.log('TOTAL PRICE ', this.totalPrice);
-      console.log('SELECTED PARTICIPANTS ', this.selectedParticipants);
     } else {
       this.totalPrice = 0;
-      console.log('Nombre de participants non sélectionné');
     }
   }
 
@@ -130,11 +124,9 @@ export class ReservationComponent implements OnInit {
         status: 'PENDING',
       });
       const reservationDate = this.reservationForm.value;
-      console.log('Form submitted : ', reservationDate);
 
       this.preReservationService.createPreReservation(reservationDate).subscribe(
         (response) => {
-          console.log('Pre-reservation created : ', response);
           this.setActivityToStorage(this.activity);
 
           this.router.navigate(['payment', response.id]);
@@ -143,9 +135,6 @@ export class ReservationComponent implements OnInit {
           console.error('Error creating pre-reservation : ', error);
         }
       );
-    } else {
-      console.log('Form is invalid');
-      console.log('FORM VALUE', this.reservationForm.value);
     }
   }
 }
