@@ -20,10 +20,11 @@ import { FinalReservation } from '../models/finalReservation';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../configurations/variables';
 import { Configuration } from '../configurations/configuration';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class FinalReservationControllerService {
-  protected basePath = 'https://localhost:8080';
+  protected basePath = environment.apiBaseUrl;
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
 
