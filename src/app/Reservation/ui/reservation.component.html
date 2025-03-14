@@ -99,9 +99,9 @@
   <div class="photos-container">
     <p>Photos de l'activité</p>
     <div class="pictures">
-      <img [src]="imgUrls[1]" alt="images" />
-      <img [src]="imgUrls[2]" alt="images" />
-      <img [src]="imgUrls[3]" alt="images" />
+      <img [src]="imgUrls[1] ?? 'assets/noPhoto.jpg'" alt="images" />
+      <img [src]="imgUrls[2] ?? 'assets/noPhoto.jpg'" alt="images" />
+      <img [src]="imgUrls[3] ?? 'assets/noPhoto.jpg'" alt="images" />
     </div>
   </div>
 </div>
