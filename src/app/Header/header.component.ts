@@ -10,6 +10,7 @@ import { RegisterComponentComponent } from '../Authentication/ui/component/regis
 import { LoginComponentComponent } from '../Authentication/ui/component/login-component/login-component.component';
 import { SearchBarComponent } from './component/search-bar/search-bar.component';
 import { Router } from '@angular/router';
+import { MenuComponent } from '../Menu/menu.component';
 
 @Component({
   selector: 'app-header',
@@ -25,12 +26,13 @@ import { Router } from '@angular/router';
     RegisterComponentComponent,
     LoginComponentComponent,
     SearchBarComponent,
+    MenuComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  menuOpen = false;
+  menuIsOpen: boolean = false;
   showModalRegister: boolean = false;
   showModalLogin: boolean = false;
   checked: boolean = false;
@@ -69,7 +71,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+    this.menuIsOpen = !this.menuIsOpen;
   }
 
   toggleModalRegister() {

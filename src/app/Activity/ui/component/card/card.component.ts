@@ -14,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class CardComponent {
   @Input() activity!: Activity;
+  @Input() imgUrls!: string[];
 
   constructor(private router: Router) {}
 

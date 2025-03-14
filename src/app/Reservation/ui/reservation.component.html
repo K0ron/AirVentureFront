@@ -1,5 +1,8 @@
 <div>
-  <div class="hero-image" [ngStyle]="{ 'background-image': 'url(' + imgUrls[0] + ')' }">
+  <div
+    class="hero-image"
+    [ngStyle]="{ 'background-image': 'url(' + (imgUrls[0] ?? 'assets/noPhoto.jpg') + ') ' }"
+  >
     <div class="hero-text">
       <p>{{ activity.name }}</p>
     </div>

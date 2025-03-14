@@ -20,6 +20,7 @@ export class ActivityComponent implements OnInit {
   public filtredActivities: Activity[] = [];
   public showFilter: boolean = false;
   public titleCategory: string = '';
+  public imgUrls: string[] = [];
 
   constructor(
     private activityService: ActivityControllerService,
@@ -31,6 +32,7 @@ export class ActivityComponent implements OnInit {
     this.searchService.searchName$.subscribe((searchQuery: string) => {
       this.filterActivities(searchQuery);
     });
+    console.log('Activities loaded');
 
     this.searchService.searchCity$.subscribe((searchQuery: string) => {
       this.filterActivities(searchQuery);
@@ -40,11 +42,13 @@ export class ActivityComponent implements OnInit {
   private loadActivities(): void {
     this.activityService.getAll().subscribe((data) => {
       const activitiesWithPictures$ = data.map((activity) =>
-        this.activityService
-          .getActivityPictures(activity.id!)
-          .pipe(map((pictures) => ({ ...activity, pictures })))
+        this.activityService.getActivityPictures(activity.id!).pipe(
+          map((pictures) => ({
+            ...activity,
+            pictures,
+          }))
+        )
       );
-
       forkJoin(activitiesWithPictures$).subscribe({
         next: (enrichedActivities) => {
           this.allActivities = enrichedActivities;

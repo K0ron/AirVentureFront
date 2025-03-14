@@ -27,7 +27,10 @@
             "styles": ["src/styles.scss"],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true
+            "prerender": true,
+            "ssr": {
+              "entry": "src/main.server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -60,7 +63,11 @@
               "buildTarget": "AirVentureFront:build:production"
             },
             "development": {
-              "buildTarget": "AirVentureFront:build:development"
+              "buildTarget": "AirVentureFront:build:development",
+              "ssl": true,
+              "sslKey": "localhost-key.pem",
+              "sslCert": "localhost.pem",
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"
