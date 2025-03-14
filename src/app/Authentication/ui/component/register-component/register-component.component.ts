@@ -15,6 +15,7 @@ import { PasswordModule } from 'primeng/password';
 import { SelectModule } from 'primeng/select';
 import { User } from '../../../../Swagger/models/user';
 import { TooltipModule } from 'primeng/tooltip';
+import { AlertService } from '../../../../Shared/services/alert.service';
 
 @Component({
   selector: 'app-register-component',
@@ -31,7 +32,8 @@ export class RegisterComponentComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationControllerService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -73,11 +75,13 @@ export class RegisterComponentComponent implements OnInit {
         },
         error: (error) => {
           if (this.termsAccepted == false) {
-            this.errorMessage = 'You must accept the terms and conditions';
+            this.alertService.showWarningAlert('You must accept the terms and conditions');
           }
           this.errorMessage = error.error || 'An error occured during register.';
         },
       });
+    } else {
+      this.alertService.showWarningAlert('Formulaire invalide');
     }
   }
 
@@ -92,6 +96,7 @@ export class RegisterComponentComponent implements OnInit {
         });
         this.router.navigate(['/activities']).then(() => {
           window.location.reload();
+          this.alertService.showSuccessAlert('Inscription reussie');
         });
       },
       error: (error) => {

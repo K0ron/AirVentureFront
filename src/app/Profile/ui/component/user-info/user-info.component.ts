@@ -3,6 +3,8 @@ import { User } from '../../../../Swagger/models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserControllerService } from '../../../../Swagger/configurations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertService } from '../../../../Shared/services/alert.service';
+import { CookieService } from '../../../../Authentication/domain/services/cookie.service';
 
 @Component({
   selector: 'app-user-info',
@@ -18,7 +20,12 @@ export class UserInfoComponent {
   updatePasswordForm!: FormGroup;
   newPassword: string = '';
 
-  constructor(private formBuilder: FormBuilder, private userService: UserControllerService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserControllerService,
+    private alertService: AlertService,
+    private cookieService: CookieService
+  ) {
     this.updateUserForm = this.formBuilder.group({
       firstName: [this.currentUser?.firstName, Validators.required],
       lastName: [this.currentUser?.lastName, Validators.required],
@@ -69,11 +76,17 @@ export class UserInfoComponent {
       if (Object.keys(userUpdateDto).length > 0) {
         if (this.currentUser?.id) {
           this.userService.update(userUpdateDto, this.currentUser.id).subscribe({
-            next: (response) => {},
-            error: (error) => {},
+            next: (response) => {
+              this.alertService.showSuccessAlert('Modifications réussies');
+            },
+            error: (error) => {
+              this.alertService.showErrorAlert('Echec des modifications');
+            },
           });
         }
       }
+    } else {
+      this.alertService.showWarningAlert('Echec des modifications');
     }
   }
 
@@ -86,16 +99,17 @@ export class UserInfoComponent {
           .updatePassword({ password: currentPassword, newPassword }, this.currentUser.id)
           .subscribe({
             next: () => {
-              alert('Mot de passe mis a jour avec succès');
+              this.alertService.showSuccessAlert('Mot de passe mis a jour avec succès');
               this.updatePasswordForm.reset();
             },
             error: (error) => {
+              this.alertService.showErrorAlert('Mot de passe non mis a jour');
               console.error('Error updating password', error);
             },
           });
       }
     } else {
-      alert('Veuillez entrer un nouveau mot de passe');
+      this.alertService.showWarningAlert('Veuillez entrer un nouveau mot de passe');
     }
   }
 }
