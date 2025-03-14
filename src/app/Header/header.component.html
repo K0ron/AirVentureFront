@@ -5,7 +5,7 @@
   </div>
 
   <div class="login-menu-container">
-    <button *ngIf="isLoggedIn" class="menu-button">
+    <button *ngIf="isLoggedIn" class="menu-button" (click)="toggleMenu()">
       <img src="assets/Burger-Menu.svg" alt="" />
     </button>
     <div class="auth-button-container" *ngIf="!isLoggedIn">
@@ -70,4 +70,7 @@
       />
     </button> -->
   </div>
+
+  <!-- MENU -->
+  <app-menu (toggleMenu)="toggleMenu()" *ngIf="menuIsOpen" />
 </div>
