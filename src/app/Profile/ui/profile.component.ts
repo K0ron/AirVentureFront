@@ -12,6 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../Header/header.component';
 import { Location } from '@angular/common';
+import { AlertService } from '../../Shared/services/alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserControllerService,
     private authService: AuthenticationControllerService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {

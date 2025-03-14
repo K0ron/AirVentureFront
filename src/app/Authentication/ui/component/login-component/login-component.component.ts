@@ -11,6 +11,7 @@ import { AuthenticationControllerService } from '../../../../Swagger/api/authent
 import { HttpResponse } from '@angular/common/http';
 import { PasswordModule } from 'primeng/password';
 import { LoginRequestDto } from '../../../domain/dto/login-request.dto';
+import { AlertService } from '../../../../Shared/services/alert.service';
 
 @Component({
   selector: 'app-login-component',
@@ -35,7 +36,8 @@ export class LoginComponentComponent {
     private authService: AuthenticationControllerService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private alertService: AlertService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -66,11 +68,9 @@ export class LoginComponentComponent {
             window.location.reload();
           });
         },
-        error: (error) => {
-          console.error('Login failed:', error);
-          this.errorMessage = error.error || 'An error occured during login.';
-        },
       });
+    } else {
+      this.alertService.showWarningAlert('Mot de passe ou email incorects');
     }
   }
 }
