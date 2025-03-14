@@ -1,0 +1,51 @@
+/* MENU */
+.menu-container {
+  position: fixed;
+  background-color: rgba(69, 96, 84, 1);
+  width: 50%;
+  height: 100%;
+  top: 0;
+  left: 50%;
+}
+
+.menu-header {
+  justify-content: end;
+  display: flex;
+  margin-right: 90px;
+  margin-top: 25px;
+  button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    i {
+      font-size: 50px;
+      color: rgba(249, 242, 232, 1);
+    }
+  }
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 500px;
+  margin-left: 174px;
+  margin-top: 92px;
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'BigNoodleTitling', sans-serif;
+    font-size: 35px;
+    color: rgba(249, 242, 232, 1);
+    text-align: start;
+  }
+  ::ng-deep .p-divider.p-divider-horizontal {
+    color: transparent !important;
+    border: 1px solid rgba(249, 242, 232, 1);
+    min-width: 28px !important;
+    margin: 15px 0 15px 0;
+  }
+}

@@ -19,5 +19,5 @@ export const routes: Routes = [
   { path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'success', component: PaymentSuccessComponent, canActivate: [AuthGuard] },
   { path: 'cancel', component: PaymentCancelComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/activities', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

@@ -20,12 +20,13 @@ import { Activity } from '../models/activity';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../configurations/variables';
 import { Configuration } from '../configurations/configuration';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ActivityControllerService {
-  protected basePath = 'https://localhost:8080';
+  protected basePath = environment.apiBaseUrl;
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
 
