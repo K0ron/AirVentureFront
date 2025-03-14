@@ -1,0 +1,33 @@
+<div class="body">
+  <div class="section">
+    <div class="product">
+      <img [src]="imgUrls[0]" alt="images" />
+      <div class="description">
+        <H1>Récapitulatif de votre réservation</H1>
+        <div class="info">
+          <h3>{{ activity.name }}</h3>
+          <p-divider layout="horizontal" />
+
+          <div class="details">
+            <i class="pi pi-user"></i>
+            <div>{{ numberOfParticipants }} personnes</div>
+          </div>
+          <p-divider layout="horizontal" />
+          <div class="details">
+            <i class="pi pi-calendar"></i>
+            <div>Le {{ activityDate }}</div>
+          </div>
+          <p-divider layout="horizontal" />
+
+          <div class="details">
+            <i class="pi pi-money-bill"></i>
+            <h5>{{ totalPrice }} €</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form>
+      <button type="button" id="checkout-button" (click)="goToPayment()">Passez au payement</button>
+    </form>
+  </div>
+</div>

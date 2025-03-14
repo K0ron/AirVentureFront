@@ -1,0 +1,76 @@
+<div class="header-container">
+  <img class="logo" src="assets/airVentureLogo.svg" alt="logo_airventure" (click)="goToHome()" />
+  <div class="search-bar">
+    <app-search-bar *ngIf="isLoggedIn" />
+  </div>
+
+  <div class="login-menu-container">
+    <button *ngIf="isLoggedIn" class="menu-button" (click)="toggleMenu()">
+      <img src="assets/Burger-Menu.svg" alt="" />
+    </button>
+    <div class="auth-button-container" *ngIf="!isLoggedIn">
+      <button class="register-button" (click)="toggleModalRegister()">S'inscrire</button>
+      <button class="login-button" (click)="toggleModalLogin()">Se connecter</button>
+    </div>
+
+    <!-- REGISTER MODAL -->
+    <p-dialog
+      [(visible)]="showModalRegister"
+      [closable]="false"
+      [modal]="true"
+      [style]="{
+        width: '480px',
+        height: '660px',
+        background: 'rgba(255, 255, 255, 1)',
+        border: 'none',
+        borderRadius: '5px'
+      }"
+    >
+      <div class="modal-header">
+        <h1 class="register-title">S'inscrire</h1>
+        <button (click)="toggleModalRegister()"><i class="pi pi-times"></i></button>
+      </div>
+      <app-register-component (registerSuccess)="toggleModalRegister()" />
+      <div class="auth-subtile">
+        Déjà membre ? <span class="auth-link" (click)="toggleModalLogin()">se connecter</span>
+      </div>
+    </p-dialog>
+    <!--#############-->
+
+    <!-- LOGIN MODAL -->
+
+    <p-dialog
+      [(visible)]="showModalLogin"
+      [closable]="false"
+      [style]="{
+        width: '480px',
+        height: '424px',
+        background: 'rgba(255, 255, 255, 1)',
+        border: 'none',
+        borderRadius: '5px'
+      }"
+    >
+      <div class="modal-header">
+        <h1 class="register-title">se connecter</h1>
+        <button (click)="toggleModalLogin()"><i class="pi pi-times"></i></button>
+      </div>
+      <app-login-component (loginSuccess)="toggleModalLogin()" (isLoggedIn)="checkLoginStatus()" />
+      <div class="auth-subtile">
+        Pas encore membre ?
+        <span class="auth-link" (click)="toggleModalRegister()">s'inscrire</span>
+      </div>
+    </p-dialog>
+    <!-- <button class="menu">
+      <img
+        width="50"
+        height="50"
+        src="assets/Burger-Menu.svg"
+        alt="burger-menu"
+        (click)="toggleMenu()"
+      />
+    </button> -->
+  </div>
+
+  <!-- MENU -->
+  <app-menu (toggleMenu)="toggleMenu()" *ngIf="menuIsOpen" />
+</div>

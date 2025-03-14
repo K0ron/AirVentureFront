@@ -1,0 +1,107 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationControllerService } from '../../../../Swagger/configurations';
+import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  emailExistingValidator,
+  passwordMatchValidator,
+  passwordValidator,
+} from '../../../../core/Validators/customValidators';
+import { RegisterRequestDto } from '../../../domain/dto/register-request.dto';
+import { HttpResponse } from '@angular/common/http';
+import { PasswordModule } from 'primeng/password';
+import { SelectModule } from 'primeng/select';
+import { User } from '../../../../Swagger/models/user';
+import { TooltipModule } from 'primeng/tooltip';
+import { AlertService } from '../../../../Shared/services/alert.service';
+
+@Component({
+  selector: 'app-register-component',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, PasswordModule, SelectModule, TooltipModule],
+  templateUrl: './register-component.component.html',
+  styleUrl: './register-component.component.scss',
+})
+export class RegisterComponentComponent implements OnInit {
+  registerForm: FormGroup;
+  errorMessage: string = '';
+  termsAccepted: boolean = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthenticationControllerService,
+    private router: Router,
+    private alertService: AlertService
+  ) {
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, emailExistingValidator([])]],
+      password: ['', [Validators.required, passwordValidator()]],
+      confirmPassword: ['', [Validators.required, passwordMatchValidator()]],
+      role: ['', Validators.required],
+    });
+  }
+  role = [
+    { name: 'Particulier', value: User.RoleEnum.PARTICULAR },
+    { name: 'Professionnel', value: User.RoleEnum.PROFESIONAL },
+  ];
+
+  ngOnInit() {
+    this.termsAccepted = false;
+  }
+
+  acceptTerms() {
+    this.termsAccepted = !this.termsAccepted;
+  }
+
+  onSubmit() {
+    if (this.registerForm.valid && this.termsAccepted == true) {
+      const registerDto = new RegisterRequestDto(
+        this.registerForm.get('firstName')?.value,
+        this.registerForm.get('lastName')?.value,
+        this.registerForm.get('email')?.value,
+        this.registerForm.get('password')?.value,
+        this.registerForm.get('role')?.value
+      );
+      this.authService.register(registerDto).subscribe({
+        next: (response: HttpResponse<any>) => {
+          this.loginAfterRegistration(
+            this.registerForm.get('email')?.value,
+            this.registerForm.get('password')?.value
+          );
+        },
+        error: (error) => {
+          if (this.termsAccepted == false) {
+            this.alertService.showWarningAlert('You must accept the terms and conditions');
+          }
+          this.errorMessage = error.error || 'An error occured during register.';
+        },
+      });
+    } else {
+      this.alertService.showWarningAlert('Formulaire invalide');
+    }
+  }
+
+  private loginAfterRegistration(email: string, password: string) {
+    this.authService.login({ email, password }).subscribe({
+      next: (response) => {
+        this.authService.getCurrentUser().subscribe({
+          next: (userDate) => {},
+          error: (error) => {
+            console.error('Failed to get current user date:', error);
+          },
+        });
+        this.router.navigate(['/activities']).then(() => {
+          window.location.reload();
+          this.alertService.showSuccessAlert('Inscription reussie');
+        });
+      },
+      error: (error) => {
+        this.errorMessage = error.error || 'An error occured during login.';
+      },
+    });
+  }
+}

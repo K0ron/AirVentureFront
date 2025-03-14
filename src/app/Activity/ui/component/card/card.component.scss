@@ -1,0 +1,31 @@
+.card-container {
+  width: 434px;
+  height: 366px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-container:hover {
+  img {
+    transform: scale(1.02);
+  }
+}
+
+.image-container {
+  img {
+    width: 434px;
+    height: 270px;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.text-container {
+  margin-top: 5px;
+}
+
+button {
+  cursor: pointer;
+}

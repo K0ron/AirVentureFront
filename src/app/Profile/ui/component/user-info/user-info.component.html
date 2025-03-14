@@ -1,0 +1,71 @@
+<div class="info-container">
+  <p>
+    N'hésitez pas à modifier vos coordonnées ci-dessous pour que votre compte AirVenture soit
+    parfaitement à jour.
+  </p>
+  <form class="user-container" [formGroup]="updateUserForm">
+    <div class="input-container">
+      <label for="firstName">Prénom</label>
+      <input
+        type="firstName"
+        id="firstName"
+        formControlName="firstName"
+        [value]="currentUser?.firstName"
+      />
+    </div>
+    <div class="input-container">
+      <label for="lastName">Nom</label>
+      <input
+        type="lastName"
+        id="lastName"
+        formControlName="lastName"
+        [value]="currentUser?.lastName"
+      />
+    </div>
+    <div class="input-container">
+      <label for="email">Email</label>
+      <input type="email" id="email" [value]="currentUser?.email" readonly />
+    </div>
+    <div class="input-container">
+      <label for="dateOfBirth">Date de naissance</label>
+      <input type="text" [value]="formatDate(currentUser?.dateOfBirth)" readonly />
+    </div>
+    <div class="input-container">
+      <label for="city">Ma ville</label>
+      <input type="city" id="city" formControlName="city" [value]="currentUser?.city" />
+    </div>
+    <div class="input-container">
+      <label for="myLanguages">Ma langue</label>
+      <select name="" id="">
+        <option value="Francais">Français</option>
+        <option value="Anglais">Anglais</option>
+      </select>
+      <i class="pi pi-chevron-down"></i>
+    </div>
+  </form>
+  <form class="password-container" [formGroup]="updatePasswordForm">
+    <div class="change-password">
+      <div class="input-container">
+        <label for="currentPassword">Mot de passe actuel</label>
+        <input
+          type="password"
+          id="currentPassword"
+          formControlName="currentPassword"
+          placeholder="Entrez votre mot de passe actuel"
+        />
+      </div>
+      <div class="input-container">
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input
+          type="password"
+          id="newPassword"
+          formControlName="newPassword"
+          placeholder="Entrez votre nouveau mot de passe"
+        />
+      </div>
+    </div>
+
+    <button class="action-button" (click)="updatePassword()">Changer mon mot de passe</button>
+  </form>
+  <button class="action-button" (click)="onSubmit()">Enregistrer les modifications</button>
+</div>
