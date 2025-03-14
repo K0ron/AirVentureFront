@@ -21,13 +21,13 @@ import { User } from '../models/user';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../configurations/variables';
 import { Configuration } from '../configurations/configuration';
-import { environment } from '../../../../environments/environment';
+import { environmentProd } from '../../../../environments/environment-prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationControllerService {
-  protected basePath = environment.apiBaseUrl;
+  protected basePath = environmentProd.apiBaseUrl;
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
 
