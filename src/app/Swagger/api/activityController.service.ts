@@ -448,30 +448,30 @@ export class ActivityControllerService {
    * @param reportProgress flag to report request and response progress.
    */
   public uploadActivityPictures(
-    files: Array<Blob>,
+    formData: FormData,
     id: number,
     observe?: 'body',
     reportProgress?: boolean
   ): Observable<Array<string>>;
   public uploadActivityPictures(
-    files: Array<Blob>,
+    formData: FormData,
     id: number,
     observe?: 'response',
     reportProgress?: boolean
   ): Observable<HttpResponse<Array<string>>>;
   public uploadActivityPictures(
-    files: Array<Blob>,
+    formData: FormData,
     id: number,
     observe?: 'events',
     reportProgress?: boolean
   ): Observable<HttpEvent<Array<string>>>;
   public uploadActivityPictures(
-    files: Array<Blob>,
+    formData: FormData,
     id: number,
     observe: any = 'body',
     reportProgress: boolean = false
   ): Observable<any> {
-    if (files === null || files === undefined) {
+    if (formData === null || formData === undefined) {
       throw new Error(
         'Required parameter files was null or undefined when calling uploadActivityPictures.'
       );
@@ -483,12 +483,12 @@ export class ActivityControllerService {
       );
     }
 
-    let queryParameters = new HttpParams({ encoder: new CustomHttpUrlEncodingCodec() });
-    if (files) {
-      files.forEach((element) => {
-        queryParameters = queryParameters.append('files', <any>element);
-      });
-    }
+    // let queryParameters = new HttpParams({ encoder: new CustomHttpUrlEncodingCodec() });
+    // if (files) {
+    //   files.forEach((element) => {
+    //     queryParameters = queryParameters.append('files', <any>element);
+    //   });
+    // }
 
     let headers = this.defaultHeaders;
 
@@ -507,7 +507,7 @@ export class ActivityControllerService {
       'post',
       `${this.basePath}/activity/${encodeURIComponent(String(id))}/upload-pictures`,
       {
-        params: queryParameters,
+        body: formData,
         withCredentials: this.configuration.withCredentials,
         headers: headers,
         observe: observe,

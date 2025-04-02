@@ -70,7 +70,8 @@
               "ssl": true,
               "sslKey": "localhost-key.pem",
               "sslCert": "localhost.pem",
-              "port": 4200
+              "port": 4200,
+              "hmr": false
             }
           },
           "defaultConfiguration": "development"
