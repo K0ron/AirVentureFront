@@ -1,4 +1,3 @@
-import { environment } from './../../../../environments/environment';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
@@ -11,6 +10,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
+import { environmentProd } from '../../../../environments/environment-prod';
 
 @Component({
   selector: 'app-payment',
@@ -46,7 +46,7 @@ export class PaymentComponent implements OnInit {
   ) {}
 
   async ngAfterViewInit() {
-    this.stripe = await loadStripe(environment.stripePublicKey);
+    this.stripe = await loadStripe(environmentProd.stripePublicKey);
     const elements = this.stripe!.elements();
     this.card = elements.create('card');
   }

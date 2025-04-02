@@ -22,12 +22,13 @@ import { UserPasswordChangeDTO } from '../models/userPasswordChangeDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../configurations/variables';
 import { Configuration } from '../configurations/configuration';
+import { environmentProd } from '../../../../environments/environment-prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserControllerService {
-  protected basePath = 'https://localhost:8080';
+  protected basePath = environmentProd.apiBaseUrl;
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
 
