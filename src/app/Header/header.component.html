@@ -72,5 +72,5 @@
   </div>
 
   <!-- MENU -->
-  <app-menu (toggleMenu)="toggleMenu()" *ngIf="menuIsOpen" />
+  <app-menu (toggleMenu)="toggleMenu()" *ngIf="menuIsOpen" [userIsPro]="userIsPro" />
 </div>

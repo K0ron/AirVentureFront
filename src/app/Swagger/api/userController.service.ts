@@ -24,7 +24,9 @@ import { BASE_PATH, COLLECTION_FORMATS } from '../configurations/variables';
 import { Configuration } from '../configurations/configuration';
 import { environmentProd } from '../../../../environments/environment-prod';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserControllerService {
   protected basePath = environmentProd.apiBaseUrl;
   public defaultHeaders = new HttpHeaders();

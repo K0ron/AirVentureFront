@@ -30,10 +30,13 @@ export interface Activity {
     reviews?: Array<Review>;
 }
 export namespace Activity {
-    export type CategoryEnum = 'SPORT' | 'EXTERIEUR' | 'DECOUVERTE';
+    export type CategoryEnum = 'AERIEN' | 'NEIGE' | 'AQUATIQUE' | 'NATURE' | 'PILOTAGE' | 'URBAIN';
     export const CategoryEnum = {
-        SPORT: 'SPORT' as CategoryEnum,
-        EXTERIEUR: 'EXTERIEUR' as CategoryEnum,
-        DECOUVERTE: 'DECOUVERTE' as CategoryEnum
+        AERIEN: 'AERIEN' as CategoryEnum,
+        NEIGE: 'NEIGE' as CategoryEnum,
+        AQUATIQUE: 'AQUATIQUE' as CategoryEnum,
+        NATURE: 'NATURE' as CategoryEnum,
+        PILOTAGE: 'PILOTAGE' as CategoryEnum,
+        URBAIN: 'URBAIN' as CategoryEnum
     };
 }
