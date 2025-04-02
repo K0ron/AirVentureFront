@@ -5,6 +5,7 @@
   <div class="menu-content">
     <button>Favoris</button>
     <button (click)="goToProfile()">Compte</button>
+    <button *ngIf="userIsPro" (click)="goToCreateActivity()">Créer une activité</button>
     <p-divider layout="horizontal" />
     <button (click)="goToActivities()">Les activités</button>
     <button>Les destinations</button>

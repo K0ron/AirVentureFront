@@ -1,0 +1,107 @@
+<div class="create-activity">
+  <h1>Création d'activité</h1>
+  <form [formGroup]="activityForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="text-container">
+      <div class="info-container">
+        <div class="input-container">
+          <label for="name">Nom de l'activité</label>
+          <input type="text" id="name" formControlName="name" />
+        </div>
+        <div class="input-container">
+          <label for="price">Prix</label>
+          <input type="number" id="price" formControlName="price" />
+        </div>
+        <div class="input-container">
+          <label for="maxParticipants">Nombre de participants maximum</label>
+          <input type="number" id="maxParticipants" formControlName="maxParticipants" />
+        </div>
+        <div class="input-container">
+          <label for="duration">Durée</label>
+          <input type="number" id="duration" formControlName="duration" />
+        </div>
+        <div class="input-container">
+          <label for="category">Catégorie</label>
+          <div class="custom-select">
+            <select
+              formControlName="category"
+              name="category"
+              id="category"
+              placeholder="--Choisissez une catégorie--"
+            >
+              <option value="" disabled selected>--Choisissez une catégorie--</option>
+              <option value="AERIEN">Aerien</option>
+              <option value="AQUATIQUE">Aquatique</option>
+              <option value="NATURE">Nature</option>
+              <option value="NEIGE">Neige</option>
+              <option value="PILOTAGE">Pilotage</option>
+              <option value="URBAIN">Urbain</option>
+            </select>
+            <i class="pi pi-chevron-down"></i>
+          </div>
+        </div>
+        <div class="input-container">
+          <label for="adress">Adresse</label>
+          <input type="text" id="adress" formControlName="adress" />
+        </div>
+        <div class="input-container">
+          <label for="city">Ville</label>
+          <input type="text" id="city" formControlName="city" />
+        </div>
+        <div class="input-container">
+          <label for="zipCode">Code postal</label>
+          <input type="text" id="zipCode" formControlName="zipCode" />
+        </div>
+      </div>
+      <div class="description-container">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" formControlName="description"></textarea>
+      </div>
+    </div>
+    <div class="image-container">
+      <div>
+        <label for="image1">Image de couverture</label>
+        <div class="file-container">
+          <input type="file" id="image1" (change)="onFileSelected($event, 0)" accept="image/*" />
+          <i class="pi pi-download placeholder" *ngIf="!imagePreviews[0]"></i>
+          <div *ngIf="imagePreviews[0]">
+            <img [src]="imagePreviews[0]" alt="Image Preview 1" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="image2">Image 2 :</label>
+        <div class="file-container">
+          <input type="file" id="image2" (change)="onFileSelected($event, 1)" accept="image/*" />
+          <i class="pi pi-download placeholder" *ngIf="!imagePreviews[1]"></i>
+          <div *ngIf="imagePreviews[1]">
+            <img [src]="imagePreviews[1]" alt="Image Preview 2" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="image3">Image 3 :</label>
+        <div class="file-container">
+          <input type="file" id="image3" (change)="onFileSelected($event, 2)" accept="image/*" />
+          <i class="pi pi-download placeholder" *ngIf="!imagePreviews[2]"></i>
+          <div *ngIf="imagePreviews[2]">
+            <img [src]="imagePreviews[2]" alt="Image Preview 3" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="image4">Image 4 :</label>
+        <div class="file-container">
+          <input type="file" id="image4" (change)="onFileSelected($event, 3)" accept="image/*" />
+          <i class="pi pi-download placeholder" *ngIf="!imagePreviews[3]"></i>
+          <div *ngIf="imagePreviews[3]">
+            <img [src]="imagePreviews[3]" alt="Image Preview 4" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="action-button">Créer Activité</button>
+  </form>
+</div>
